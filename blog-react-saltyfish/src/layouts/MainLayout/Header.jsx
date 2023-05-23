@@ -1,20 +1,15 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { useState } from 'react'
+import { Dialog, Popover } from '@headlessui/react'
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link'
 
 const routeMenu = [
   {
     title: '首页',
-    url: '/home'
+    url: '/'
   },
   {
     title: '博文',
@@ -38,7 +33,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white">
+    <header className="bg-white border-y">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
@@ -59,9 +54,9 @@ export default function Header() {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           {
             routeMenu.map(item => {
-              return (<a href={item.url} className="text-sm font-semibold leading-6 text-gray-900">
+              return (<Link key={item.url} href={item.url} className="text-lg font-medium leading-6 text-gray-900">
                 {item.title}
-              </a>)
+              </Link>)
             })
           }
         </Popover.Group>
@@ -97,16 +92,16 @@ export default function Header() {
               <div className="space-y-2 py-6">
                 {
                   routeMenu.map(item => {
-                    return (<a href={item.url} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    return (<Link key={`${item.url}1`} href={item.url} className="-mx-3 block rounded-lg px-3 py-2 text-base font-medium leading-7 text-gray-900 hover:bg-gray-50">
                       {item.title}
-                    </a>)
+                    </Link>)
                   })
                 }
               </div>
               <div className="py-6">
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-medium leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
                 </a>
