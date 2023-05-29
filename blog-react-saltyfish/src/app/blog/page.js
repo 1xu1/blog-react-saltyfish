@@ -6,8 +6,16 @@ import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
+import { useEffect } from 'react'
+
+import { getBlogList } from '@/api/blog.js'
 
 export default function Home() {
+
+  useEffect( () => {
+    getBlogList()
+  } )
+
   return (
     <MainLayout>
       <main className="flex min-h-screen flex-row justify-between">
