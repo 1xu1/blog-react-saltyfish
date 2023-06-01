@@ -8,24 +8,22 @@ import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
 import { useEffect } from 'react'
 
-import { getBlogList } from '@/api/blog.js'
+import { getBlogList, getBlogLabels } from '@/service/blog.js'
 
-export default function Home() {
+export default async function Page() {
 
-  useEffect( () => {
-    getBlogList()
-  } )
+  const projects = await initAll();
 
   return (
     <MainLayout>
       <main className="flex min-h-screen flex-row justify-between">
         <div className='max-lg:hidden w-1/4 cursor-pointer	'>
-          <LableCloud 
+          <LableCloud
             labels={[{
-              name:'测试',
+              name: '测试',
               num: 12
             }]}
-            onClickLable={()=>{}}
+            onClickLable={() => { }}
           />
         </div>
         <div className="w-full flex flex-col">
@@ -37,4 +35,15 @@ export default function Home() {
       </main>
     </MainLayout>
   )
+}
+
+// `app` directory
+
+// This function can be named anything
+async function initAll() {
+  const res = await fetch(`/api/blog/getBlogList`, { cache: 'no-store' });
+  console.log('---res',res)
+  const projects = await res.json();
+
+  return projects;
 }
