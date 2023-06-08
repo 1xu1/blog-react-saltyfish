@@ -1,13 +1,8 @@
 import axios from "axios";
 // import store from "@/store";
 const service = axios.create({
-  baseURL: process.env.APP_HOST,
+  baseURL: process.env.APP_HOST + '/api' ,
 });
-
-console.log(process.env.APP_HOST)
-console.log(process.env)
-console.log(process)
-
 
 service.interceptors.request.use(
   (config) => {
