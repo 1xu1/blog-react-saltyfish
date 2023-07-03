@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function BlogBlock(props) {
-  const [state, setState] = useState(0);
+export default function LableCloud(props) {
 
   const {
-    labels,
-    onClickLable
+    labels
   } = props
 
   return (
@@ -15,7 +13,7 @@ export default function BlogBlock(props) {
         <div className='flex flex-row flex-wrap'>
           {labels.map(label => {
             return (
-              <a key={label.name} onClick={onClickLable} className='text-sm p-px border rounded-lg border-cyan-500 hover:border-cyan-50'>
+              <a key={label.name} className='text-sm p-px border rounded-lg border-cyan-500 hover:border-cyan-50'>
                 <span className='text-cyan-500'>{`${label?.name ?? ''}`}</span>
                 <span className='text-cyan-500'>{`${label?.num ?? ''}`}</span>
               </a>

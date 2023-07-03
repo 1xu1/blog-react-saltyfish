@@ -1,18 +1,17 @@
-"use client"
-
-import Image from 'next/image'
-
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
-import { useEffect } from 'react'
 
 import { getBlogList, getBlogLabels } from '@/service/blog.js'
 
-export default async function Page() {
+async function getData() {
+  const res = await getBlogList()
+  return res.data
+}
 
-  const projects = await initAll();
+export default async function Page(  ) {
+  const blogList = await getData() || []
 
   return (
     <MainLayout>
@@ -27,7 +26,14 @@ export default async function Page() {
           />
         </div>
         <div className="w-full flex flex-col">
-          <BlogBlock />
+          {blogList.map(blog=>{
+            return <BlogBlock
+              blogTitle={blog.blogTitle}
+              blogContent={blog.blogContent}
+              blogTime={blog.blogTime}
+              blogId={blog.id}
+            />
+          })}
         </div>
         <div>
 
@@ -35,15 +41,4 @@ export default async function Page() {
       </main>
     </MainLayout>
   )
-}
-
-// `app` directory
-
-// This function can be named anything
-async function initAll() {
-  const res = await fetch(`/api/blog/getBlogList`, { cache: 'no-store' });
-  console.log('---res',res)
-  const projects = await res.json();
-
-  return projects;
 }

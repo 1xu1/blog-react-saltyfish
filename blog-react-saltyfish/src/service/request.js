@@ -4,23 +4,11 @@ const service = axios.create({
   baseURL: process.env.APP_HOST + '/api' ,
 });
 
-service.interceptors.request.use(
-  (config) => {
-    if (sessionStorage.getItem("login_stat")) {
-      config.headers["Authorization"] = sessionStorage.getItem("login_stat");
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 service.interceptors.response.use(
   (response) => {
     const res = response.data;
-    if (res.rspCode != 200) {
-      throw res.data;
+    if (res.errMsg) {
+      throw res.errMsg;
     }
     return res;
   },
