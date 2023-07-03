@@ -8,9 +8,9 @@ export async function GET(request, context) {
 
   const blogId = searchParams.get('id')
   try {
-    const data = await db.select()
+    const data = (await db.select()
       .from(m_blog)
-      .where(eq(m_blog.id, blogId))
+      .where(eq(m_blog.id, blogId)))[0]
 
     return NextResponse.json({ data })
   } catch (error) {
