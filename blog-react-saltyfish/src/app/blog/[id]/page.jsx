@@ -1,5 +1,6 @@
 import { getBlog } from '@/service/blog.js'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
+import BlogContent from './BlogContent'
 
 async function getData(params) {
   const res = await getBlog(params)
@@ -7,12 +8,14 @@ async function getData(params) {
 }
 
 export default async function Page({ params }) {
-  
-  const blog = await getData(params)
+
+  const blog = await getData(params) || {}
 
   return (
     <MainLayout>
-      <div>{blog.blogContent}</div>
+      <BlogContent
+        blogContent={blog.blogContent}>
+      </BlogContent>
     </MainLayout>
   );
 }
