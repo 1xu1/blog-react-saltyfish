@@ -7,6 +7,11 @@ const components = {
       {props.children}
     </h1>
   ),
+  h2: (props) => (
+    <h2 {...props} className="large-text">
+      {props.children}
+    </h2>
+  ),
 }
 
 export function CustomMDX(props) {

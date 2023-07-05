@@ -32,6 +32,7 @@ export default async function Page(  ) {
               blogContent={blog.blogContent}
               blogTime={blog.blogTime}
               blogId={blog.id}
+              key={blog.id}
             />
           })}
         </div>
