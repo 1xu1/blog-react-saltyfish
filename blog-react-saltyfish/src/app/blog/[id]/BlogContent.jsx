@@ -1,10 +1,6 @@
 import { CustomMDX } from '@/components/mdx-remote'
+import { transBlogContent } from '@/lib/utils'
 
-// 替换换行符
-function transBlogContent(text){
-  const regex = /\\n/ig;
-  return text.replaceAll(regex,'\n')
-}
 
 export default async function BlogContent(props) {
 
@@ -15,8 +11,8 @@ export default async function BlogContent(props) {
   return (
     <div>
       <CustomMDX
-      source={transBlogContent(blogContent)}
-    />
+        source={transBlogContent(blogContent)}
+      />
     </div>
   );
 }
