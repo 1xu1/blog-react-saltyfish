@@ -6,8 +6,12 @@ import LableCloud from './LableCloud'
 import { getBlogList, getBlogLabels } from '@/service/blog.js'
 
 async function getData() {
-  const res = await getBlogList()
-  return res.data
+  try {
+    const res = await getBlogList()
+    return res.data
+  } catch (error) {
+    return undefined
+  }
 }
 
 export default async function Page(  ) {

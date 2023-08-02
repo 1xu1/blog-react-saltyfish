@@ -3,8 +3,12 @@ import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import BlogContent from './BlogContent'
 
 async function getData(params) {
-  const res = await getBlog(params)
-  return res.data
+  try {
+    const res = await getBlog(params)
+    return res.data
+  } catch (error) {
+    return undefined
+  }
 }
 
 export default async function Page({ params }) {
