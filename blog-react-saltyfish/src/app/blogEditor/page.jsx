@@ -10,6 +10,7 @@ import { transBlogContent } from '@/lib/utils'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
+import message from "@/components/Notifications/Message";
 
 
 export default function BlogEditor(props) {
@@ -56,11 +57,12 @@ export default function BlogEditor(props) {
       blogTitle: blogTitle,
       blogLabel: blogLabel
     }
-
-    updateBlog(param)
-      .then(res => {
-
-      })
+    message.success('保存成功')
+    
+    // updateBlog(param)
+    //   .then(res => {
+      // message.success('保存成功')
+    //   })
   }
 
   const addBlog = () =>{

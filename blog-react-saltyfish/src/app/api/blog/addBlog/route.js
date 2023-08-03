@@ -21,16 +21,16 @@ export async function POST(request, context) {
   }
 
   try {
-     await db.insert(users)
+    const id = await db.insert(users)
       .value({
         blogContent: blogContent,
         blogLable: blogLable,
         blogTitle: blogTitle,
         blogVisibility: 0
       })
-      .returning(eq(m_blog.id, blogId));
+      .returning(m_blog.id);
 
-    return NextResponse.json({ data: 'success' })
+    return NextResponse.json({ data: id })
   } catch (error) {
     return NextResponse.json({ error: error?.message ?? error }, { status: 500 })
   }

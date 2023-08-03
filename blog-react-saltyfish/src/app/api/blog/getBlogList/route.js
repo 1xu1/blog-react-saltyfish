@@ -10,7 +10,7 @@ export async function GET(request) {
 
   try {
     const data = await db.select().from(m_blog).orderBy(desc(m_blog.blogTime)).limit(limit).offset(offset)
-    return NextResponse.json({ data })
+    return NextResponse.json({ data:data })
   } catch (error) {
     return NextResponse.json({ error: error?.message ?? error}, { status: 500 })
   }
