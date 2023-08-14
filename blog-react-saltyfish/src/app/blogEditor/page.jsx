@@ -84,6 +84,24 @@ export default function BlogEditor(props) {
     }
   }
 
+  const onChangeBlogVis = (blogVisibility) => {
+    const param = {
+      id: id,
+      blogVisibility: blogVisibility
+    }
+    if (!isLoading) {
+      setIsLoading(true)
+      updateBlog(param)
+        .then(res => {
+          const msg = blogVisibility === 0 ? '隐藏成功' : '发布成功'
+          message.success(msg)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }
+
   const createBlog = () => {
     const param = {
       blogContent: '新增博文，请在此编辑',
@@ -104,8 +122,8 @@ export default function BlogEditor(props) {
       <span className="max-w-xs mx-5"><Input label={'标签'} value={blogLabel} placeholder={'#分割标签'} onChange={(e) => setBlogLabel(e.target.value)}></Input></span>
       <div className="flex justify-between items-center mx-5">
         <Button onClick={saveBlog} className="m-2">保存</Button>
-        <Button className="m-2">发布</Button>
-        <Button className="m-2">隐藏</Button>
+        {blogVisibility === 0 && <Button onClick={() => onChangeBlogVis(1)} className="m-2">发布</Button>}
+        {blogVisibility === 1 && <Button onClick={() => onChangeBlogVis(0)} className="m-2">隐藏</Button>}
         <Button className="m-2" onClick={createBlog}>新建</Button>
       </div>
     </div>

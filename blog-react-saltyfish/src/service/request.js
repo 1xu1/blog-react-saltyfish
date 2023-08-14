@@ -1,4 +1,6 @@
 import axios from "axios";
+import message from "@/components/Notifications/Message";
+
 const service = axios.create({
   baseURL: process.env.APP_HOST + '/api' ,
 });
@@ -6,8 +8,9 @@ const service = axios.create({
 service.interceptors.response.use(
   (response) => {
     const res = response.data;
-    if (res.errMsg) {
-      throw res.errMsg;
+    if (res.error) {
+      message.error(res.error);
+      throw res.error;
     }
     return res;
   },
