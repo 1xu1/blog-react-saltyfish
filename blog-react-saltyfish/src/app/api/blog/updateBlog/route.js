@@ -13,19 +13,19 @@ export async function POST(request, context) {
   } = await request.json()
 
   try {
-    // await db
-    // .update(m_blog)
-    // .set({
-    //   blogContent: blogContent, 
-    //   blogLabel: blogLable, 
-    //   blogVisibility: blogVisibility, 
-    //   blogTitleL:blogTitle
-    //   blogTime: new Date(),
-    // })
-    // .where(eq(m_blog.id, blogId))
+    await db
+      .update(m_blog)
+      .set({
+        blogContent: blogContent,
+        blogLabel: blogLable,
+        blogVisibility: blogVisibility,
+        blogTitle: blogTitle,
+        blogTime: new Date(),
+      })
+      .where(eq(m_blog.id, id))
 
     return NextResponse.json({ data: 'success' })
   } catch (error) {
-    return NextResponse.json({ error: error?.message ?? error}, { status: 500 })
+    return NextResponse.json({ error: error?.message ?? error }, { status: 500 })
   }
 }

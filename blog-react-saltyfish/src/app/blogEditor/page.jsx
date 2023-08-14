@@ -1,10 +1,10 @@
 "use client"
 
 import "vditor/dist/index.css";
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from 'next/navigation'
 import Vditor from "vditor";
-import { getBlog, updateBlog } from '@/service/blog.js'
+import { getBlog, updateBlog, addBlog } from '@/service/blog.js'
 import { transBlogContent } from '@/lib/utils'
 
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
@@ -12,13 +12,13 @@ import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import message from "@/components/Notifications/Message";
 
-
 export default function BlogEditor(props) {
-  const [vd, setVd] = useState(null);
+  const viditor = useRef(null);
   const [blogContent, setBlogContent] = useState('');
   const [blogTitle, setBlogTitle] = useState('');
   const [blogLabel, setBlogLabel] = useState('');
   const [blogVisibility, setBlogVisibility] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const router = useRouter()
@@ -30,11 +30,11 @@ export default function BlogEditor(props) {
   const { id } = searchParams
 
   useEffect(() => {
-    const vditor = new Vditor("vditor", {
+    const editor = new Vditor("vditor", {
       mode: 'sv',
       width: '80%'
     });
-    setVd(vditor);
+    viditor.current = editor
 
     if (!id) return
 
@@ -45,28 +45,57 @@ export default function BlogEditor(props) {
       setBlogTitle(blog.blogTitle)
       setBlogLabel(blog.blogLabel)
       setBlogVisibility(blog.blogVisibility)
-      vditor.setValue(blogContent)
+      editor.setValue(blogContent)
     })
   }, []);
 
-  const saveBlog = () => {
-    const blogContent = vd.getValue()
-    const param = {
-      id: id,
-      blogContent: blogContent,
-      blogTitle: blogTitle,
-      blogLabel: blogLabel
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleClickKey, false);
+    return () => {
+      window.removeEventListener("keydown", handleClickKey, false);
+    };
+  }, [blogTitle, blogLabel, blogVisibility]);
+
+  const handleClickKey = (e) => {
+    if ((e.key == 's' || e.key == 'S') && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      e.preventDefault();
+      saveBlog()
     }
-    message.success('保存成功')
-    
-    // updateBlog(param)
-    //   .then(res => {
-      // message.success('保存成功')
-    //   })
   }
 
-  const addBlog = () =>{
-    
+  const saveBlog = () => {
+    const param = {
+      id: id,
+      blogContent: viditor.current.getValue(),
+      blogTitle: blogTitle,
+      blogLabel: blogLabel,
+      blogVisibility: blogVisibility
+    }
+    if (!isLoading) {
+      setIsLoading(true)
+      updateBlog(param)
+        .then(res => {
+          message.success('保存成功')
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }
+
+  const createBlog = () => {
+    const param = {
+      blogContent: '新增博文，请在此编辑',
+      blogTitle: '新增博文',
+      blogLabel: '#新增'
+    }
+    addBlog(param)
+      .then(res => {
+        message.success('新增博文成功')
+        router.push('/blogEditor?id=' + res?.data?.id)
+        router.refresh()
+      })
   }
 
   return <MainLayout>
@@ -77,7 +106,7 @@ export default function BlogEditor(props) {
         <Button onClick={saveBlog} className="m-2">保存</Button>
         <Button className="m-2">发布</Button>
         <Button className="m-2">隐藏</Button>
-        {!id && <Button className="m-2">新建</Button>}
+        <Button className="m-2" onClick={createBlog}>新建</Button>
       </div>
     </div>
 
