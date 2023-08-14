@@ -1,7 +1,7 @@
 import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
-import { desc } from "drizzle-orm";
+import { desc, sql } from "drizzle-orm";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
@@ -9,9 +9,15 @@ export async function GET(request) {
   const offset = searchParams.get('offset') || 0
 
   try {
-    const data = await db.select().from(m_blog).orderBy(desc(m_blog.blogTime)).limit(limit).offset(offset)
-    return NextResponse.json({ data:data })
+    const data = await db.select({
+      ...m_blog,
+      blogContent: sql`CONCAT(LEFT(${m_blog.blogContent},100),'...')`
+    }).from(m_blog)
+      .orderBy(desc(m_blog.blogTime))
+      .limit(limit)
+      .offset(offset)
+    return NextResponse.json({ data: data })
   } catch (error) {
-    return NextResponse.json({ error: error?.message ?? error}, { status: 500 })
+    return NextResponse.json({ error: error?.message ?? error }, { status: 500 })
   }
 }
