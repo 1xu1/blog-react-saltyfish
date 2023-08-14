@@ -17,9 +17,11 @@ export default async function Page({ params }) {
 
   return (
     <MainLayout>
-      <BlogContent
-        blogContent={blog.blogContent}>
-      </BlogContent>
+      <div className='mx-auto w-full max-w-3xl'>
+        <BlogContent
+          blogContent={blog.blogContent}>
+        </BlogContent>
+      </div>
     </MainLayout>
   );
 }
