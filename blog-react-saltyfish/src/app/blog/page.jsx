@@ -20,7 +20,7 @@ export default async function Page(  ) {
   return (
     <MainLayout>
       <main className="flex min-h-screen flex-row justify-between">
-        <div className='max-lg:hidden w-1/4 cursor-pointer	'>
+        <div className='fixed max-lg:hidden w-1/4 cursor-pointer max-w-xs'>
           <LableCloud
             labels={[{
               name: '测试',
@@ -29,7 +29,7 @@ export default async function Page(  ) {
             onClickLable={() => { }}
           />
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full max-w-3xl flex flex-col mx-auto">
           {blogList.map(blog=>{
             return <BlogBlock
               blogTitle={blog.blogTitle}
