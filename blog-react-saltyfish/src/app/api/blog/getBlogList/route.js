@@ -17,7 +17,7 @@ export async function GET(request) {
   }
 }
 
-export async function getBlogListSql(limit, offset) {
+export async function getBlogListSql(limit = 10, offset = 0) {
   const data = await db.select({
     ...m_blog,
     blogContent: sql`CONCAT(LEFT(${m_blog.blogContent},100),'...')`

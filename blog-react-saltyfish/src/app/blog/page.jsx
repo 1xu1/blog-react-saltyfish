@@ -16,7 +16,7 @@ async function getData() {
   }
 }
 
-export default async function Page(  ) {
+export default async function Page() {
   const blogList = await getData() || []
 
   return (
@@ -32,7 +32,7 @@ export default async function Page(  ) {
           />
         </div>
         <div className="w-full max-w-3xl flex flex-col mx-auto">
-          {blogList.map(blog=>{
+          {blogList.map(blog => {
             return <BlogBlock
               blogTitle={blog.blogTitle}
               blogContent={blog.blogContent}
@@ -43,7 +43,6 @@ export default async function Page(  ) {
           })}
         </div>
         <div>
-
         </div>
       </main>
     </MainLayout>
