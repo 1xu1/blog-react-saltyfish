@@ -11,3 +11,12 @@ export const addBlog = (params) => {
 export const getBlogLabels = (params) => {
   return request.get("/blog/getBlogLabels", params);
 };
+export const getBlog = (params) => {
+  return request.get("/blog/getBlog", params);
+};
+export const updateBlog = (params) => {
+  return request.post("/blog/updateBlog", params);
+};
+export const updateBlogVis = (params) => {
+  return request.post("/blog/updateBlogVis", params);
+};

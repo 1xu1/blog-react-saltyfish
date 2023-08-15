@@ -1,7 +1,3 @@
-"use client"
-
-import Image from 'next/image'
-
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 
 export default function Home() {

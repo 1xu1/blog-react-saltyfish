@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="mx-auto flex items-center justify-center">
+    <div className="mx-auto flex items-center justify-center my-5">
       <a>&copy; 2023 盐巴鱼</a>
       <i className="face-smile" />
       <a>-版权所有.</a>
