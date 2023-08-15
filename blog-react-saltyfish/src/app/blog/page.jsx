@@ -4,13 +4,14 @@ import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
 
 import { getBlogList, getBlogLabels } from '@/service/blog.js'
+import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
 
 async function getData() {
   try {
-    const res = await getBlogList()
-    return res.data
+    const data = await getBlogListSql()
+    return data
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return undefined
   }
 }

@@ -1,13 +1,14 @@
-import { getBlog } from '@/service/blog.js'
+import { getBlogSql } from '@/app/api/blog/getBlog/route.js'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import BlogContent from './BlogContent'
 
 async function getData(params) {
   try {
-    const res = await getBlog(params)
-    return res.data
+    const blogId = params['id']
+    const data = await getBlogSql(blogId)
+    return data
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return undefined
   }
 }

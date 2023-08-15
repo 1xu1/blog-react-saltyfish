@@ -9,17 +9,23 @@ export async function GET(request) {
   const offset = searchParams.get('offset') || 0
 
   try {
-    const data = await db.select({
-      ...m_blog,
-      blogContent: sql`CONCAT(LEFT(${m_blog.blogContent},100),'...')`
-    }).from(m_blog)
-      .where(eq(m_blog.blogVisibility, 1))
-      .orderBy(desc(m_blog.blogTime))
-      .limit(limit)
-      .offset(offset)
+    const data = await getBlogList(limit, offset)
     return NextResponse.json({ data: data })
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: error?.message ?? error }, { status: 500 })
   }
+}
+
+export async function getBlogListSql(limit, offset) {
+  const data = await db.select({
+    ...m_blog,
+    blogContent: sql`CONCAT(LEFT(${m_blog.blogContent},100),'...')`
+  }).from(m_blog)
+    .where(eq(m_blog.blogVisibility, 1))
+    .orderBy(desc(m_blog.blogTime))
+    .limit(limit)
+    .offset(offset)
+
+  return data
 }
