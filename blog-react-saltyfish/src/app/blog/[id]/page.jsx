@@ -7,6 +7,7 @@ async function getData(params) {
     const res = await getBlog(params)
     return res.data
   } catch (error) {
+    console.log(error)
     return undefined
   }
 }

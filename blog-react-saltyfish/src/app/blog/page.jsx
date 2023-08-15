@@ -10,6 +10,7 @@ async function getData() {
     const res = await getBlogList()
     return res.data
   } catch (error) {
+    console.log(error)
     return undefined
   }
 }
