@@ -18,7 +18,7 @@ const routeMenu = [
   },
   {
     title: '更新日志',
-    url: '/updateLog'
+    url: '/blog?label=更新日志'
   },
   {
     title: '关于本站',

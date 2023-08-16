@@ -42,8 +42,8 @@ export default function BlogEditor(props) {
       const blog = res.data
       const blogContent = (transBlogContent(blog.blogContent))
       setBlogContent(blogContent)
-      setBlogTitle(blog.blogTitle)
-      setBlogLabel(blog.blogLabel)
+      setBlogTitle(blog?.blogTitle ?? '')
+      setBlogLabel(blog?.blogLabel ?? '')
       setBlogVisibility(blog.blogVisibility)
       editor.setValue(blogContent)
     })

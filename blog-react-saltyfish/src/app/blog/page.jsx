@@ -6,9 +6,9 @@ import LableCloud from './LableCloud'
 import { getBlogList, getBlogLabels } from '@/service/blog.js'
 import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
 
-async function getData() {
+async function getData(label = '') {
   try {
-    const data = await getBlogListSql()
+    const data = await getBlogListSql(null, null, label ?? '')
     return data
   } catch (error) {
     console.error(error)
@@ -16,8 +16,15 @@ async function getData() {
   }
 }
 
-export default async function Page() {
-  const blogList = await getData() || []
+export default async function Page(props) {
+
+  const {
+    searchParams
+  } = props
+
+  const { label } = searchParams
+
+  const blogList = await getData(label) || []
 
   return (
     <MainLayout>
