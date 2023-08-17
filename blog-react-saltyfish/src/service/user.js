@@ -4,7 +4,7 @@ export const getUserInfo = (params) => {
   return request.get("/user/getUserInfo", params);
 };
 export const login = (params) => {
-  return request.get("/user/login", params);
+  return request.post("/user/login", params);
 };
 export const getAllUsers = (params) => {
   return request.get("/admin/getAllUser", params);

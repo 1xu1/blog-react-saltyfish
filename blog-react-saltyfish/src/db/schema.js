@@ -14,3 +14,15 @@ export const m_blog = pgTable('m_blog', {
     blogCreateTime: timestamp('blog_create_time').defaultNow(),
     blogWriterId: integer('blog_writer_id')
 });
+
+export const m_user = pgTable('m_user', {
+    id: serial('user_id').primaryKey(),
+    userName: varchar('user_name'),
+    userPassword: varchar('user_pwd'),
+    userEmail: varchar('user_email'),
+    userLink: varchar('user_link'),
+    userRole: varchar('user_role'),
+    userRegisterTime: timestamp('register_time').defaultNow(),
+    userHead: varchar('user_head'),
+    userGender: varchar('user_gender'),
+});

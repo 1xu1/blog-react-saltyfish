@@ -6,6 +6,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import LoginModal from './LoginModal'
 
 const routeMenu = [
   {
@@ -32,6 +33,11 @@ function classNames(...classes) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
+
+  const openLoginModal = () => {
+    setLoginModalOpen(true)
+  }
 
   return (
     <header className="bg-white border-y">
@@ -62,7 +68,7 @@ export default function Header() {
           }
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900" onClick={openLoginModal}>
             登录 <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -103,14 +109,18 @@ export default function Header() {
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-medium leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={openLoginModal}
                 >
-                  Log in
+                  登录
                 </a>
               </div>
             </div>
           </div>
         </Dialog.Panel>
       </Dialog>
+      <LoginModal
+        visible={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)} />
     </header>
   )
 }
