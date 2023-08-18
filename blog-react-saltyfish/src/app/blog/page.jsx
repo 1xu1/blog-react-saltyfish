@@ -8,7 +8,7 @@ import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
 
 async function getData(label = '') {
   try {
-    const data = await getBlogListSql(null, null, label ?? '')
+    const data = await getBlogListSql(10, 0, label ?? '')
     return data
   } catch (error) {
     console.error(error)

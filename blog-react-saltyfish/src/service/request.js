@@ -5,12 +5,23 @@ const service = axios.create({
   baseURL: process.env.APP_HOST + '/api' ,
 });
 
+service.interceptors.request.use(
+  (config) => {
+    if (sessionStorage.getItem("token")) {
+      config.headers["Authorization"] = sessionStorage.getItem("token");
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 service.interceptors.response.use(
   (response) => {
     const res = response.data;
     if (res.error) {
       message.error(res.error);
-      throw res.error;
     }
     return res;
   },

@@ -40,11 +40,11 @@ export default function BlogEditor(props) {
 
     getBlog({ id }).then(res => {
       const blog = res.data
-      const blogContent = (transBlogContent(blog.blogContent))
+      const blogContent = (transBlogContent(blog?.blogContent ?? ''))
       setBlogContent(blogContent)
       setBlogTitle(blog?.blogTitle ?? '')
       setBlogLabel(blog?.blogLabel ?? '')
-      setBlogVisibility(blog.blogVisibility)
+      setBlogVisibility(blog?.blogVisibility)
       editor.setValue(blogContent)
     })
   }, []);

@@ -6,7 +6,8 @@ export default function LoginModal(props) {
 
   const {
     visible,
-    onClose
+    onClose,
+    loginCallBack
   } = props
 
   const [loginForm, setLoginForm] = useState({})
@@ -18,8 +19,6 @@ export default function LoginModal(props) {
     })
   }
 
-  // 登录
-
   const closeModal = () => {
     onClose(false)
   }
@@ -27,8 +26,8 @@ export default function LoginModal(props) {
   const handleLogin = () => {
     login(loginForm)
     .then(res=>{
-      console.log('---login',res)
-      sessionStorage.setItem('token',res.data)
+      sessionStorage.setItem('token',res.data?.token)
+      loginCallBack(res?.data?.userInfo)
     })
   }
 

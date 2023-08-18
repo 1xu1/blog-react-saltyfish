@@ -1,21 +1,28 @@
 import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
+import { checkTokenRole } from '@/lib/jwt.js'
 
 export async function POST(request, context) {
   const {
     blogContent,
     blogLabel,
-    blogTitle
+    blogTitle,
+    blogWriterId
   } = await request.json()
+  const headersList = headers()
+  const token = headersList.get('Authorization')
   try {
+    if (checkTokenRole(token, 'admin')) {
+      return NextResponse.json({ error: '您无新增权限' })
+    }
     const data = await db.insert(m_blog)
       .values({
         blogContent: blogContent,
         blogLabel: blogLabel,
         blogTitle: blogTitle,
         blogVisibility: 0,
-        blogWriterId: 1
+        blogWriterId: blogWriterId ?? 1
       })
       .returning({ id: m_blog.id });
 

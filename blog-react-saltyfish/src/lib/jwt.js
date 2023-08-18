@@ -8,17 +8,44 @@ const getToken = (userInfo) => {
 }
 
 const checkToken = (token) => {
-  try{
+  if (!token) {
+    return {}
+  }
+  try {
     const decoded = jwt.verify(token, tokenKey)
     return decoded
   }
-  catch(err){
-    console.log('err---',err)
+  catch (err) {
+    console.log('err---', err)
+    return {}
+  }
+}
+
+const checkTokenRole = (token, userRole) => {
+  try {
+    const role = checkToken(token)?.userRole
+    return role === userRole
+  }
+  catch (err) {
+    console.log('err---', err)
+    return false
+  }
+}
+
+const checkTokenUserId = (token, uid) => {
+  try {
+    const id = checkToken(token)?.id
+    return id === uid
+  }
+  catch (err) {
+    console.log('err---', err)
     return false
   }
 }
 
 module.exports = {
   getToken,
-  checkToken
+  checkToken,
+  checkTokenRole,
+  checkTokenUserId
 }
