@@ -2,13 +2,11 @@ import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
-
-import { getBlogList, getBlogLabels } from '@/service/blog.js'
 import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
 
-async function getData(label = '') {
+async function getData(firstLoadingSize, label = '') {
   try {
-    const data = await getBlogListSql(10, 0, label ?? '')
+    const data = await getBlogListSql(firstLoadingSize, 0, label ?? '')
     return data
   } catch (error) {
     console.error(error)
@@ -17,14 +15,14 @@ async function getData(label = '') {
 }
 
 export default async function Page(props) {
-
+  const firstLoadingSize = 20
   const {
     searchParams
   } = props
 
   const { label } = searchParams
 
-  const blogList = await getData(label) || []
+  const blogList = await getData(firstLoadingSize, label) || []
 
   return (
     <MainLayout>
@@ -48,6 +46,7 @@ export default async function Page(props) {
               key={blog.id}
             />
           })}
+          {/* <LoadingMore firstLoadingSize={firstLoadingSize} /> */}
         </div>
         <div>
         </div>
