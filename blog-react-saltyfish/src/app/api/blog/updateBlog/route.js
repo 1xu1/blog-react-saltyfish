@@ -1,7 +1,10 @@
 import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { headers } from 'next/headers'
 import { eq } from "drizzle-orm";
+import { getBlogWriterId } from '@/db/sql.js'
+import { checkTokenUserId } from '@/lib/jwt.js'
 
 export async function POST(request, context) {
   const {
@@ -12,7 +15,14 @@ export async function POST(request, context) {
     blogVisibility
   } = await request.json()
 
+  const headersList = headers()
+  const token = headersList.get('Authorization')
+
   try {
+    const blogWriter = await getBlogWriterId(id)
+    if (!checkTokenUserId(token, blogWriter)) {
+      return NextResponse.json({ error: '您无编辑权限' })
+    }
     await db
       .update(m_blog)
       .set({

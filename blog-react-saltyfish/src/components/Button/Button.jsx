@@ -4,6 +4,9 @@ export default function Button(props) {
     onClick
   } = props
   return (
-    <button className="block rounded-md bg-sky-500 text-white text-base px-3 py-2 h-10 hover:bg-sky-700" onClick={onClick}>{children}</button>
+    <button className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+      onClick={onClick}>
+      {children}
+    </button>
   );
 }

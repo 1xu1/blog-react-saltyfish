@@ -37,16 +37,16 @@ const components = {
       {props.children}
     </code>
   ),
-  pre: (props) => (
-    <pre {...props} className="text-base bg-slate-800 text-white rounded-sm my-4 p-2">
+  code: (props) => (
+    <span {...props} className="text-base bg-slate-800 text-white rounded-sm p-1">
+      {props.children}
+    </span>
+  ),
+  pre: (props) => {
+    return <pre {...props} className="text-base bg-slate-800 text-white rounded-sm my-4 p-2">
       {props.children}
     </pre>
-  ),
-  // code: (props) => (
-  //   <code {...props} className="text-base bg-slate-900 text-white rounded-sm my-4 p-2">
-  //     {props.children}
-  //   </code>
-  // ),
+  },
   li: (props) => (
     <li {...props} className=" ml-4 leading-7">
       <span className=' mr-2 text-xl'>·</span>{props.children}
@@ -56,7 +56,7 @@ const components = {
     <p {...props} className=" my-5">
       {props.children}
     </p>
-  ),
+  )
 }
 
 export function CustomMDX(props) {
