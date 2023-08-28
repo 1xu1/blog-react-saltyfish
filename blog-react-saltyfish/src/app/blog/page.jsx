@@ -40,10 +40,10 @@ export default async function Page(props) {
           {blogList.map(blog => {
             return <BlogBlock
               blogTitle={blog.blogTitle}
-              blogContent={blog.blogContent}
               blogTime={blog.blogTime}
               blogId={blog.id}
               key={blog.id}
+              blogLabel={blog.blogLabel}
             />
           })}
           {/* <LoadingMore firstLoadingSize={firstLoadingSize} /> */}

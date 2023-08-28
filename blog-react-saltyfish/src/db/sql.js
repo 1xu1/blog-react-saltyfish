@@ -35,3 +35,23 @@ export async function getBlogWriterId(blogId) {
     ))
   return data?.[0]['blogWriterId'] ?? null
 }
+
+export async function addBlogRead(blogId) {
+  await db
+    .update(m_blog)
+    .set({
+      blogRead: m_blog.blogRead + 1
+    })
+    .where(eq(m_blog.id, blogId))
+  return true
+}
+
+export async function addBlogLike(blogId) {
+  await db
+    .update(m_blog)
+    .set({
+      blogLike: m_blog.blogLike + 1
+    })
+    .where(eq(m_blog.id, blogId))
+  return true
+}
