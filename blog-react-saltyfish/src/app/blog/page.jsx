@@ -2,6 +2,7 @@ import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
+import LoadingMore from './LoadingMore'
 import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
 
 async function getData(firstLoadingSize, label = '') {
@@ -46,7 +47,7 @@ export default async function Page(props) {
               blogLabel={blog.blogLabel}
             />
           })}
-          {/* <LoadingMore firstLoadingSize={firstLoadingSize} /> */}
+          <LoadingMore searchParams={searchParams} firstLoadingSize={firstLoadingSize} />
         </div>
         <div>
         </div>

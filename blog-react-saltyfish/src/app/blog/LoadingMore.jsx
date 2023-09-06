@@ -1,23 +1,54 @@
 "use client"
 
 import { getBlogList } from '@/service/blog.js'
-import { useEffect } from 'react';
-import {isScrollButtom} from '@/lib/utils.js';
+import { useEffect, useState } from 'react';
+import { isScrollButtom } from '@/lib/utils.js';
+import BlogBlock from './BlogBlock'
+import message from "@/components/Notifications/Message";
 
 export default function LoadingMore(props) {
-  const [blogList, setBlogContent] = useState('');
+  const [blogList, setBlogContent] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pageNum, setPageNum] = useState(1)
+  const [refresh, setRefresh] = useState(false)
+
   const {
-    firstLoadingSize
+    firstLoadingSize,
+    searchParams
   } = props
+  const { label } = searchParams
 
-  useEffect(()=>{
+  useEffect(() => {
     window.onscroll = () => {
-      if(isScrollButtom()){
-
+      if (isScrollButtom()) {
+        setRefresh(prevValue => {
+          return !prevValue
+        })
       }
     };
-  },[])
+  }, [])
+
+  // 加载事件
+  useEffect(() => {
+    setLoading(true)
+    getBlogList({
+      limit: firstLoadingSize,
+      offset: firstLoadingSize * pageNum,
+      label: label
+    })
+      .then(res => {
+        if (res.data.length === 0) {
+          message.info('没有更多内容啦！')
+        }
+        else {
+          setPageNum(pageNum + 1)
+          setBlogContent(blogList.concat(res.data))
+        }
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [refresh])
 
   return <>
     {blogList.map(blog => {
@@ -27,6 +58,7 @@ export default function LoadingMore(props) {
         blogTime={blog.blogTime}
         blogId={blog.id}
         key={blog.id}
+        blogLabel={blog.blogLabel}
       />
     })}
   </>
