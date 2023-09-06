@@ -1,4 +1,5 @@
 import { getBlogSql } from '@/app/api/blog/getBlog/route.js'
+import { addBlogRead } from '@/db/sql'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import BlogContent from './BlogContent'
 
@@ -6,6 +7,7 @@ async function getData(params) {
   try {
     const blogId = params['id']
     const data = await getBlogSql(blogId)
+    addBlogRead()
     return data
   } catch (error) {
     console.error(error)

@@ -1,6 +1,6 @@
 import { db } from '@/db/index.js'
-import { m_user, m_blog } from '@/db/schema.js'
-import { eq, and } from "drizzle-orm";
+import { m_user, m_blog, m_comment } from '@/db/schema.js'
+import { eq, and, desc, sql } from "drizzle-orm";
 
 export async function getUserSql(name, password) {
   const data = (await db.select({
@@ -40,7 +40,7 @@ export async function addBlogRead(blogId) {
   await db
     .update(m_blog)
     .set({
-      blogRead: m_blog.blogRead + 1
+      blogRead: sql`${m_blog.blogRead} + 1`
     })
     .where(eq(m_blog.id, blogId))
   return true
@@ -50,8 +50,58 @@ export async function addBlogLike(blogId) {
   await db
     .update(m_blog)
     .set({
-      blogLike: m_blog.blogLike + 1
+      blogLike: sql`${m_blog.blogLike} + 1`
     })
     .where(eq(m_blog.id, blogId))
   return true
+}
+
+export async function getBlogLabels() {
+  const labels = await db
+    .select({
+      label: m_blog.blogLabel
+    })
+    .from(m_blog)
+    .where(eq(m_blog.blogVisibility, 1))
+  return labels
+}
+
+export async function getBlogComment(blogId) {
+  const comments = await db
+    .select(m_comment)
+    .from(m_comment)
+    .where(eq(m_comment.blogId, blogId))
+  return comments
+}
+
+export async function addComment(comment) {
+  const maxFloor = await getCommentMaxFloor(comment.blogId)
+  const data = await db.insert(m_blog)
+    .values({
+      content: comment.content,
+      userName: comment.userName,
+      link: comment.link,
+      userId: comment.userId,
+      blogId: comment.blogId,
+      floor: maxFloor,
+      like: 0
+    })
+    .returning(m_comment);
+  return data
+}
+
+export async function getCommentMaxFloor(blogId) {
+  const maxFloor = await db
+    .select({
+      floor
+    })
+    .from(m_comment)
+    .where(eq(m_comment.blogId, blogId))
+    .orderBy(desc)
+    .limit(1)
+  return maxFloor[0].floor
+}
+
+export async function addWebSiteRead() {
+  return addBlogRead(0)
 }
