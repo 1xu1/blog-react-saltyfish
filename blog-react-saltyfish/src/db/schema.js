@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, integer, timestamp, bigint } from "drizzle-orm/pg-core";
  
 export const m_blog = pgTable('m_blog', {
     id: serial('blog_id').primaryKey(),
@@ -25,4 +25,16 @@ export const m_user = pgTable('m_user', {
     userRegisterTime: timestamp('register_time').defaultNow(),
     userHead: varchar('user_head'),
     userGender: varchar('user_gender'),
+});
+
+export const m_comment = pgTable('m_comment', {
+    id: serial('id').primaryKey(),
+    like: integer('like'),
+    floor: integer('floor'),
+    blogId: bigint('blog_id', { mode: 'number' }),
+    content: varchar('content'),
+    userName: varchar('user_name'),
+    link: varchar('link'),
+    createTime: timestamp('create_time').defaultNow(),
+    userId: bigint('user_id', { mode: 'number' }),
 });

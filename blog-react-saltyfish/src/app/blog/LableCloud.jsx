@@ -13,9 +13,9 @@ export default function LableCloud(props) {
         <div className='flex flex-row flex-wrap'>
           {labels.map(label => {
             return (
-              <a key={label.name} className='text-sm p-px border rounded-lg border-cyan-500 hover:border-cyan-50'>
-                <span className='text-cyan-500'>{`${label?.name ?? ''}`}</span>
-                <span className='text-cyan-500'>{`${label?.num ?? ''}`}</span>
+              <a key={label.name} className=' me-2 p-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out'>
+                <span>{`${label?.name ?? ''}`}</span>
+                <span>{`${label?.num ?? ''}`}</span>
               </a>
             )
           })}

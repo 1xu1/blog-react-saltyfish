@@ -19,9 +19,12 @@ export async function GET(request) {
 }
 
 export async function getBlogListSql(limit = 10, offset = 0, label = '') {
+  const {
+    blogContent,
+    ...rest
+  } = m_blog
   const data = await db.select({
-    ...m_blog,
-    blogContent: sql`CONCAT(LEFT(${m_blog.blogContent},100),'...')`
+    ...rest
   }).from(m_blog)
     .where(
       and(
