@@ -3,8 +3,7 @@ import { getBlogLabels } from '@/db/sql.js'
 
 export async function GET(request, context) {
   try {
-    const labels = await getBlogLabels()
-    const data = generalLabelData(labels)
+    const data = getData()
     return NextResponse.json({ data })
   } catch (error) {
     console.error(error)
@@ -12,12 +11,18 @@ export async function GET(request, context) {
   }
 }
 
+export async function getData() {
+  const labels = await getBlogLabels()
+  const data = generalLabelData(labels)
+  return data
+}
+
 function generalLabelData(labels) {
   const returnData = {}
   labels.forEach(label => {
     const labelKeys = label.label.split('#')
     for (let key of labelKeys) {
-      if(!key){
+      if (!key) {
         continue
       }
       if (returnData[key]) {
@@ -28,5 +33,15 @@ function generalLabelData(labels) {
       }
     }
   })
-  return returnData
+  const labelArray = []
+  for (let item in returnData) {
+    labelArray.push({
+      name: item,
+      num: returnData[item]
+    })
+  }
+  labelArray.sort((a, b) => {
+    return b.num - a.num
+  })
+  return labelArray
 }

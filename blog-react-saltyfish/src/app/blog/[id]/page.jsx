@@ -7,7 +7,7 @@ async function getData(params) {
   try {
     const blogId = params['id']
     const data = await getBlogSql(blogId)
-    addBlogRead()
+    addBlogRead(blogId)
     return data
   } catch (error) {
     console.error(error)

@@ -53,12 +53,8 @@ export default function LoadingMore(props) {
   return <>
     {blogList.map(blog => {
       return <BlogBlock
-        blogTitle={blog.blogTitle}
-        blogContent={blog.blogContent}
-        blogTime={blog.blogTime}
-        blogId={blog.id}
+        blog={blog}
         key={blog.id}
-        blogLabel={blog.blogLabel}
       />
     })}
   </>

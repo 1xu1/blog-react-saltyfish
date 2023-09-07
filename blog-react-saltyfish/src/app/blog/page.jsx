@@ -1,13 +1,17 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
+import ScrollToTop from '@/components/ScrollToTop/ScrollToTop'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
 import LoadingMore from './LoadingMore'
 import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
+import { getData as getLabelData } from '@/app/api/blog/getBlogLabels/route.js'
 
 async function getData(firstLoadingSize, label = '') {
   try {
-    const data = await getBlogListSql(firstLoadingSize, 0, label ?? '')
+    const data = {}
+    data.blogList = await getBlogListSql(firstLoadingSize, 0, label ?? '')
+    data.labelCloud = await getLabelData()
     return data
   } catch (error) {
     console.error(error)
@@ -23,34 +27,32 @@ export default async function Page(props) {
 
   const { label } = searchParams
 
-  const blogList = await getData(firstLoadingSize, label) || []
+  const {
+    blogList, 
+    labelCloud
+  } = await getData(firstLoadingSize, label) || {}
 
   return (
     <MainLayout>
-      <main className="flex min-h-screen flex-row justify-between">
-        <div className='fixed max-lg:hidden w-1/4 cursor-pointer max-w-xs'>
+      <main className="flex min-h-screen flex-row justify-between mx-auto">
+        <div className='max-lg:hidden w-1/4 max-w-xs'>
           <LableCloud
-            labels={[{
-              name: '测试',
-              num: 12
-            }]}
+            labels={labelCloud}
             onClickLable={() => { }}
           />
         </div>
         <div className="w-full max-w-3xl flex flex-col mx-auto">
           {blogList.map(blog => {
             return <BlogBlock
-              blogTitle={blog.blogTitle}
-              blogTime={blog.blogTime}
-              blogId={blog.id}
+              blog={blog}
               key={blog.id}
-              blogLabel={blog.blogLabel}
             />
           })}
           <LoadingMore searchParams={searchParams} firstLoadingSize={firstLoadingSize} />
         </div>
         <div>
         </div>
+        <ScrollToTop />
       </main>
     </MainLayout>
   )

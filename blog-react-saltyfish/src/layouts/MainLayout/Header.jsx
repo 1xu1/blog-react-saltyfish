@@ -22,8 +22,8 @@ const routeMenu = [
     url: '/blog?label=更新日志'
   },
   {
-    title: '关于本站',
-    url: '/about'
+    title: '站点留言',
+    url: '/siteMessage'
   },
 ]
 

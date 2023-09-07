@@ -49,7 +49,7 @@ function Notifications(props) {
     <div className='fixed top-5 right-5' id={props.id}>
       {
         notices.map((notification) => {
-          return <Notification key={notification.uuid} {...notification} />
+          return <Notification key={notification.uuid} {...notification}/>
         })
       }
     </div>
