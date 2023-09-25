@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'
 
 export default function LableCloud(props) {
 
@@ -13,10 +14,10 @@ export default function LableCloud(props) {
         <div className='flex flex-row flex-wrap'>
           {labels.map(label => {
             return (
-              <a key={label.name} className=' me-2 p-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out'>
+              <Link href={`/blog?label=${label.name}`} key={label.name} className=' me-2 p-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out'>
                 <span>{`${label?.name ?? ''}`}</span>
                 <span>{`${label?.num ?? ''}`}</span>
-              </a>
+              </Link>
             )
           })}
         </div>
