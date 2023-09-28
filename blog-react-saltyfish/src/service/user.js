@@ -21,3 +21,6 @@ export const updateUserInfo = (params) => {
 export const getUserLikeBlogs = (params) => {
   return request.get("/blog/getUserLikeBlogs", params);
 };
+export const loginByGithub = (params) => {
+  return request.get("/user/loginByGithub" + params,)
+}

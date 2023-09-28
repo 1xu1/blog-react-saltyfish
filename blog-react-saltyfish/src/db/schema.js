@@ -25,6 +25,7 @@ export const m_user = pgTable('m_user', {
     userRegisterTime: timestamp('register_time').defaultNow(),
     userHead: varchar('user_head'),
     userGender: varchar('user_gender'),
+    githubUid: integer('github_uid')
 });
 
 export const m_comment = pgTable('m_comment', {

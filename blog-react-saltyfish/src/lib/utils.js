@@ -16,6 +16,7 @@ function getScrollTop() {
     scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
     return scrollTop;
 }
+
 //文档的总高度
 function getScrollHeight() {
     var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
@@ -28,6 +29,7 @@ function getScrollHeight() {
     scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
     return scrollHeight;
 }
+
 //浏览器视口的高度
 function getWindowHeight() {
     var windowHeight = 0;
@@ -38,8 +40,18 @@ function getWindowHeight() {
     }
     return windowHeight;
 }
-export function isScrollButtom(){
+
+export function isScrollButtom() {
     if (getScrollTop() + getWindowHeight() == getScrollHeight()) {
         return true
     }
+}
+
+// 生成随机字符串
+export function randomString() {
+    const length = 12
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@'
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
 }

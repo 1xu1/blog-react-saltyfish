@@ -7,7 +7,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    if (sessionStorage.getItem("token")) {
+    if (this?.window?.sessionStorage && sessionStorage.getItem("token")) {
       config.headers["Authorization"] = sessionStorage.getItem("token");
     }
     return config;
