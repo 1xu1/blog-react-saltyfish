@@ -20,6 +20,7 @@ export async function GET(request) {
 
 export async function getBlogListSql(limit = 10, offset = 0, label = '') {
   const {
+    // eslint-disable-next-line no-unused-vars
     blogContent,
     ...rest
   } = m_blog

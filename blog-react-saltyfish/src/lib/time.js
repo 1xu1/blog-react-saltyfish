@@ -15,17 +15,6 @@ function getTodayUnix() {
     date.setMilliseconds(0);
     return date.getTime();
 }
-//获取1月1日0点0分0秒
-function getYearUnix() {
-    const date = new Date();
-    date.setMonth(0);
-    date.setDate(1);
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-    return date.getTime();
-}
 function getLastDate(time) {
     const date = new Date(time);
     const month = date.getMonth() + 1;
@@ -36,14 +25,13 @@ function getLastDate(time) {
         date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     const seconds =
         date.getSeconds() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    return date.getFullYear() + "-" + month + "-" + day;
+    return `${date.getFullYear()}-${month}-${day}  ${hours}:${minutes}:${seconds}`
 }
 export function getFormatTime(timestamp) {
     timestamp = new Date(timestamp);
     const now = getUnix();
     const timestamp1 = timestamp.getTime();
     const today = getTodayUnix();
-    const year = getYearUnix();
     const timer = (now - timestamp1) / 1000;
     let tip = "";
     if (timer <= 0) {

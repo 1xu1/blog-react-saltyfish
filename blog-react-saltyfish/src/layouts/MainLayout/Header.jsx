@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import LoginModal from './LoginModal'
+import Image from 'next/image'
 
 const routeMenu = [
   {
@@ -26,10 +27,6 @@ const routeMenu = [
     url: '/siteMessage'
   },
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -52,7 +49,7 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">盐巴鱼的博客</span>
-            <img className="h-9 w-auto rounded-full" src="/favicon.ico" alt="" />
+            <Image className="h-9 w-auto rounded-full" src="/favicon.ico" alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -80,7 +77,7 @@ export default function Header() {
           </a>}
           {
             loginStatus && <span className='flex flex-row justify-center items-center space-x-1'>
-              <img className="h-8 w-auto rounded-full" src={userInfo?.userHead} alt="" />
+              <Image className="h-8 w-auto rounded-full" src={userInfo?.userHead} alt="" />
               <span>{userInfo?.userName}</span>
             </span>
           }
@@ -92,7 +89,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""

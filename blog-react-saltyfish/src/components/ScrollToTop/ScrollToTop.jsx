@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-export default function ScrollToTop(props) {
+export default function ScrollToTop() {
 
   const toTop = () => {
     window.scrollTo({

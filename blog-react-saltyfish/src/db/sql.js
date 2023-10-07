@@ -94,7 +94,7 @@ export async function addComment(comment) {
 export async function getCommentMaxFloor(blogId) {
   const maxFloor = await db
     .select({
-      floor
+      floor: m_comment.floor
     })
     .from(m_comment)
     .where(eq(m_comment.blogId, blogId))

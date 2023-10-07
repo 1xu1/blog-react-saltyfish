@@ -8,6 +8,7 @@ import message from "@/components/Notifications/Message";
 
 export default function LoadingMore(props) {
   const [blogList, setBlogContent] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [pageNum, setPageNum] = useState(1)
   const [refresh, setRefresh] = useState(false)

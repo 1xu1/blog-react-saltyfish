@@ -3,7 +3,7 @@ import { getGithubToken, getGithubUserInfoByToken } from '@/lib/authorize.js'
 import { selectUserByGithubId, insertUserByGithubUserInfo } from '@/db/sql.js'
 import { getToken } from '@/lib/jwt.js'
 
-export async function GET(request, context) {
+export async function GET(request) {
   const { searchParams } = new URL(request.url)
 
   const code = searchParams.get('code')

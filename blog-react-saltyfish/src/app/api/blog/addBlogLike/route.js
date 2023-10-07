@@ -1,8 +1,7 @@
-import { db } from '@/db/index.js'
 import { NextResponse } from 'next/server';
 import { addBlogLike } from '@/db/sql.js'
 
-export async function POST(request, context) {
+export async function POST(request) {
   const {
     id
   } = await request.json()

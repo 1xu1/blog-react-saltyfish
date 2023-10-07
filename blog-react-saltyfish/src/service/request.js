@@ -1,3 +1,4 @@
+/*global Promise */
 import axios from "axios";
 import message from "@/components/Notifications/Message";
 

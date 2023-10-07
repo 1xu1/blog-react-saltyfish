@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { getUserSql } from '@/db/sql.js';
 import { getToken } from '@/lib/jwt.js'
 
-export async function POST(request, context) {
+export async function POST(request) {
   const {
     name,
     password

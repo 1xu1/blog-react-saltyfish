@@ -3,7 +3,7 @@ import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
 import { eq } from "drizzle-orm";
 
-export async function GET(request, context) {
+export async function GET(request) {
   const { searchParams } = new URL(request.url)
 
   const blogId = searchParams.get('id')
