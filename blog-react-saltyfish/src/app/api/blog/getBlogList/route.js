@@ -1,7 +1,7 @@
 import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
-import { desc, sql, eq, like, and } from "drizzle-orm";
+import { desc, eq, like, and } from "drizzle-orm";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
