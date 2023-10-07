@@ -2,8 +2,9 @@ import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
 import { checkTokenRole } from '@/lib/jwt.js'
+import { headers } from 'next/headers'
 
-export async function POST(request, context) {
+export async function POST(request) {
   const {
     blogContent,
     blogLabel,

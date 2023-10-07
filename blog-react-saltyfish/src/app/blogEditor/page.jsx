@@ -14,6 +14,7 @@ import message from "@/components/Notifications/Message";
 
 export default function BlogEditor(props) {
   const viditor = useRef(null);
+  // eslint-disable-next-line no-unused-vars
   const [blogContent, setBlogContent] = useState('');
   const [blogTitle, setBlogTitle] = useState('');
   const [blogLabel, setBlogLabel] = useState('');
@@ -75,7 +76,7 @@ export default function BlogEditor(props) {
     if (!isLoading) {
       setIsLoading(true)
       updateBlog(param)
-        .then(res => {
+        .then(() => {
           message.success('保存成功')
         })
         .finally(() => {
@@ -92,7 +93,7 @@ export default function BlogEditor(props) {
     if (!isLoading) {
       setIsLoading(true)
       updateBlog(param)
-        .then(res => {
+        .then(() => {
           const msg = blogVisibility === 0 ? '隐藏成功' : '发布成功'
           message.success(msg)
         })

@@ -1,6 +1,7 @@
 import { db } from '@/db/index.js'
 import { m_user, m_blog, m_comment } from '@/db/schema.js'
 import { eq, and, desc, sql } from "drizzle-orm";
+import { randomString } from '@/lib/utils.js'
 
 export async function getUserSql(name, password) {
   const data = (await db.select({
@@ -76,7 +77,7 @@ export async function getBlogComment(blogId) {
 
 export async function addComment(comment) {
   const maxFloor = await getCommentMaxFloor(comment.blogId)
-  const data = await db.insert(m_blog)
+  const data = await db.insert(m_comment)
     .values({
       content: comment.content,
       userName: comment.userName,
@@ -87,13 +88,13 @@ export async function addComment(comment) {
       like: 0
     })
     .returning(m_comment);
-  return data
+  return data[0]
 }
 
 export async function getCommentMaxFloor(blogId) {
   const maxFloor = await db
     .select({
-      floor
+      floor: m_comment.floor
     })
     .from(m_comment)
     .where(eq(m_comment.blogId, blogId))
@@ -104,4 +105,51 @@ export async function getCommentMaxFloor(blogId) {
 
 export async function addWebSiteRead() {
   return addBlogRead(0)
+}
+
+// 根据github的用户id查找用户信息
+export async function selectUserByGithubId(id) {
+  const data = (await db.select({
+    id: m_user.id,
+    userName: m_user.userName,
+    userEmail: m_user.userEmail,
+    userLink: m_user.userLink,
+    userRole: m_user.userRole,
+    userRegisterTime: m_user.userRegisterTime,
+    userHead: m_user.userHead,
+    userGender: m_user.userGender,
+  })
+    .from(m_user)
+    .where(
+      and(
+        eq(m_user.githubUid, id)
+      )
+    ))
+  return data?.[0] ?? null
+}
+
+// 根据github信息创建账户
+export async function insertUserByGithubUserInfo(userInfo) {
+  const pwd = randomString()
+  const data = await db.insert(m_user)
+    .values({
+      userName: userInfo.name,
+      userEmail: userInfo.email,
+      userLink: userInfo.blog,
+      userRole: 'User',
+      userHead: userInfo.avatar_url,
+      userPassword: pwd,
+      githubUid: userInfo.id
+    })
+    .returning({
+      id: m_user.id,
+      userName: m_user.userName,
+      userEmail: m_user.userEmail,
+      userLink: m_user.userLink,
+      userRole: m_user.userRole,
+      userRegisterTime: m_user.userRegisterTime,
+      userHead: m_user.userHead,
+      userGender: m_user.userGender,
+    });
+  return data[0]
 }

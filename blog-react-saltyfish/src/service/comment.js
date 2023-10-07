@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import request from "./request";
 export const getAllComment = (params) => {
   return request.get("/admin/getAllComment", params);

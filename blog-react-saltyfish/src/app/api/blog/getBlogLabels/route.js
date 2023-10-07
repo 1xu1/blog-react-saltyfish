@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getBlogLabels } from '@/db/sql.js'
 
-export async function GET(request, context) {
+export async function GET() {
   try {
     const data = getData()
     return NextResponse.json({ data })

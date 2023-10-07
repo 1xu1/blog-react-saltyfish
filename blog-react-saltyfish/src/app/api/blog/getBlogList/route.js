@@ -1,7 +1,7 @@
 import { db } from '@/db/index.js'
 import { m_blog } from '@/db/schema.js'
 import { NextResponse } from 'next/server';
-import { desc, sql, eq, like, and } from "drizzle-orm";
+import { desc, eq, like, and } from "drizzle-orm";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
@@ -20,6 +20,7 @@ export async function GET(request) {
 
 export async function getBlogListSql(limit = 10, offset = 0, label = '') {
   const {
+    // eslint-disable-next-line no-unused-vars
     blogContent,
     ...rest
   } = m_blog

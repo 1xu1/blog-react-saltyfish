@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { getBlogWriterId } from '@/db/sql.js'
 import { checkTokenUserId } from '@/lib/jwt.js'
 
-export async function POST(request, context) {
+export async function POST(request) {
   const {
     id,
     blogContent,

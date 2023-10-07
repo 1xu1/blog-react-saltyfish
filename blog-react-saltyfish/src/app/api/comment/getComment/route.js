@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getBlogComment } from '@/db/sql.js'
 
-export async function GET(request, context) {
+export async function GET(request) {
   const { searchParams } = new URL(request.url)
 
   const blogId = searchParams.get('id')
