@@ -28,7 +28,7 @@ export default function LoginModal(props) {
     login(loginForm)
     .then(res=>{
       sessionStorage.setItem('token',res.data?.token)
-      loginCallBack(res?.data?.userInfo)
+      loginCallBack(res?.data ?? {})
       onClose(false)
     })
   }

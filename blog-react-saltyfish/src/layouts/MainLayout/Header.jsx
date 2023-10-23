@@ -37,9 +37,17 @@ export default function Header() {
   const openLoginModal = () => {
     setLoginModalOpen(true)
   }
-  const loginCallBack = (userInfo) => {
+
+  const loginCallBack = (data) => {
+    const {
+      userInfo,
+      token
+    } = data
+
     setuserInfo(userInfo)
     window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+    window.sessionStorage.setItem('token', JSON.stringify(token))
+
     setLoginStatus(true)
   }
 
