@@ -27,7 +27,6 @@ export default function LoginModal(props) {
   const handleLogin = () => {
     login(loginForm)
     .then(res=>{
-      sessionStorage.setItem('token',res.data?.token)
       loginCallBack(res?.data ?? {})
       onClose(false)
     })

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog, Popover } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -32,11 +32,16 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [loginStatus, setLoginStatus] = useState(false)
-  const [userInfo, setuserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState({})
 
   const openLoginModal = () => {
     setLoginModalOpen(true)
   }
+
+  useEffect(() => {
+    sessionStorage.getItem('userInfo') && setUserInfo(JSON.parse(sessionStorage.getItem('userInfo') ?? '{}'))
+    sessionStorage.getItem('token') && setLoginStatus(true)
+  }, [])
 
   const loginCallBack = (data) => {
     const {
@@ -44,7 +49,7 @@ export default function Header() {
       token
     } = data
 
-    setuserInfo(userInfo)
+    setUserInfo(userInfo)
     window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
     window.sessionStorage.setItem('token', JSON.stringify(token))
 
@@ -57,7 +62,7 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">盐巴鱼的博客</span>
-            <Image className="h-9 w-auto rounded-full" src="/favicon.ico" alt="" />
+            <Image width={36} height={36} className="h-9 w-auto rounded-full" src="/favicon.ico" alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -85,7 +90,7 @@ export default function Header() {
           </a>}
           {
             loginStatus && <span className='flex flex-row justify-center items-center space-x-1'>
-              <Image className="h-8 w-auto rounded-full" src={userInfo?.userHead} alt="" />
+              <Image width={32} height={32} className="h-8 w-auto rounded-full" src={userInfo?.userHead} alt="" />
               <span>{userInfo?.userName}</span>
             </span>
           }
@@ -98,6 +103,8 @@ export default function Header() {
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image
+                width={32}
+                height={32}
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""

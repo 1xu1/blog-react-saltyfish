@@ -3,13 +3,14 @@ import { useEffect } from "react"
 import { useRouter } from 'next/navigation'
 import { loginByGithub } from "@/service/user"
 import message from "@/components/Notifications/Message";
-const router = useRouter()
 
 const PLAT_LOGIN_URL = {
   github: loginByGithub
 }
 
 export default function BlogEditor(props) {
+  const router = useRouter()
+
   const {
     searchParams
   } = props
@@ -20,14 +21,15 @@ export default function BlogEditor(props) {
       login(code, plat)
     }
     else {
-      message.err('失败，请稍后重试---' + err)
+      message.err('失败，请稍后重试---')
     }
   }, [])
 
-  login = (code, plat) => {
-    PLAT_LOGIN_URL(plat)(`?code=${code}`).then((res) => {
-      sessionStorage.setItem('token', res.token)
-      sessionStorage.setItem('userInfo', res.userInfo)
+  const login = (code, plat) => {
+    PLAT_LOGIN_URL[plat](`?code=${code}`).then((res) => {
+      console.log('res---', res)
+      sessionStorage.setItem('token', JSON.stringify(res.data.token))
+      sessionStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
       router.push('/')
     })
     .catch(err=>{
@@ -35,6 +37,7 @@ export default function BlogEditor(props) {
       message.err('失败，请稍后重试---' + err)
     })
   }
+
 
 
   return <div>
