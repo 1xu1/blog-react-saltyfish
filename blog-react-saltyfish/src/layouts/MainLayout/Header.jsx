@@ -106,7 +106,7 @@ export default function Header() {
                 width={32}
                 height={32}
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                src="/favicon.ico"
                 alt=""
               />
             </a>
