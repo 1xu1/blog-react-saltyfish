@@ -22,13 +22,16 @@ export default async function Page({ params }) {
 
   return (
     <MainLayout>
-      <div className='mx-auto w-full max-w-3xl p-8'> 
-        <BlogHeader blog={blog} />
-      </div>
+      
       <div className='mx-auto w-full max-w-3xl bg-white p-8'>
+        <BlogHeader blog={blog} />
         <BlogContent
           blogContent={blog.blogContent}>
         </BlogContent>
+      </div>
+
+      <div className='mx-auto w-full max-w-3xl bg-white p-8 my-4'>
+      
       </div>
     </MainLayout>
   );

@@ -34,14 +34,14 @@ export default async function Page(props) {
 
   return (
     <MainLayout>
-      <main className="flex min-h-screen flex-row justify-between mx-auto">
-        <div className='max-lg:hidden w-1/4 max-w-xs'>
+      <main className="flex min-h-screen flex-row justify-center mx-auto my-4">
+        <aside className='max-lg:hidden w-1/4 max-w-xs'>
           <LableCloud
             labels={labelCloud}
             onClickLable={() => { }}
           />
-        </div>
-        <div className="w-full max-w-3xl flex flex-col mx-auto">
+        </aside>
+        <div className="w-full max-w-3xl flex flex-col mx-4">
           {blogList.map(blog => {
             return <BlogBlock
               blog={blog}

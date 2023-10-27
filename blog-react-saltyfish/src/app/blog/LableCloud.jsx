@@ -8,7 +8,7 @@ export default function LableCloud(props) {
   } = props
 
   return (
-    <div className="w-full border bg-white">
+    <div className="w-full border bg-white p-4 rounded-md	">
       <div>
         <p className=' text-2xl font-semibold'>标签云</p>
         <div className='flex flex-row flex-wrap'>

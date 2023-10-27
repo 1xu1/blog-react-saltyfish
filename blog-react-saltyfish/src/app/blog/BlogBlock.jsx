@@ -18,12 +18,12 @@ export default function BlogBlock(props) {
   return (
     <div className="w-full border-y bg-white hover:shadow p-5 mb-2">
       <div className='max-w-2xl w-full mx-auto'>
-        <Link className='text-2xl font-semibold cursor-pointer' href={`/blog/${id}`}>{blogTitle}</Link>
+        <Link className='text-2xl font-semibold cursor-pointer hover:text-cyan-950' href={`/blog/${id}`}>{blogTitle}</Link>
         <p className='text-sm text-slate-600'>{getFormatTime(blogTime)}</p>
         <p className='flex flex-row leading-6 text-slate-700'>
           {blogLabelArr.map((item, index) => {
             return <a key={index} className=' me-2 p-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
-              {`${item}`}
+              {`#${item}`}
             </a>
           })}
         </p>

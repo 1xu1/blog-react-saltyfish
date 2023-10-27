@@ -33,12 +33,12 @@ const components = {
     </h2>
   ),
   inlineCode: (props) => (
-    <code {...props} className="text-base bg-slate-900 text-white rounded-sm">
+    <code {...props} className="text-base bg-slate-400 text-white rounded-sm">
       {props.children}
     </code>
   ),
   code: (props) => (
-    <span {...props} className="text-base bg-slate-800 text-white rounded-sm p-1">
+    <span {...props} className="text-base bg-slate-400 text-white rounded-sm p-1 -z-10">
       {props.children}
     </span>
   ),
