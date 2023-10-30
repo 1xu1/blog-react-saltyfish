@@ -32,18 +32,13 @@ const components = {
       {props.children}
     </h2>
   ),
-  inlineCode: (props) => (
-    <code {...props} className="text-base bg-slate-400 text-white rounded-sm">
+  code: (props) => (
+    <code {...props} className="text-base text-white rounded-sm p-1 -z-10" style={{background:'#282c34'}}>
       {props.children}
     </code>
   ),
-  code: (props) => (
-    <span {...props} className="text-base bg-slate-400 text-white rounded-sm p-1 -z-10">
-      {props.children}
-    </span>
-  ),
   pre: (props) => {
-    return <pre {...props} className="text-base bg-slate-800 text-white rounded-sm my-4 p-2">
+    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2" style={{background:'#282c34'}}>
       {props.children}
     </pre>
   },

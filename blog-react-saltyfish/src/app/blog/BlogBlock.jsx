@@ -22,7 +22,7 @@ export default function BlogBlock(props) {
         <p className='text-sm text-slate-600'>{getFormatTime(blogTime)}</p>
         <p className='flex flex-row leading-6 text-slate-700'>
           {blogLabelArr.map((item, index) => {
-            return <a key={index} className=' me-2 p-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
+            return <a key={index} className=' me-2 px-2 py-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
               {`#${item}`}
             </a>
           })}
