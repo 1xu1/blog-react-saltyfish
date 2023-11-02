@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 
 /**
@@ -30,15 +29,20 @@ export default function Table(props) {
         {dataSource.map((data, dataSourceIndex) => {
 
           return (<tr key={`tr-${dataSourceIndex}`}>
-            <td>1111</td>
-              
-            {/* {
+            {
               columns.map((column, index) => {
-                return (<td key={`tbody-${dataSourceIndex}-${index}`} >
-                  {data[column.dataIndex] || ''}
-                </td>)
+                let content = ''
+                if(column.render){
+                  content = column.render(data[column.dataIndex], data, dataSourceIndex)
+                }
+                else{
+                  content = (data[column.dataIndex] || '').toString()
+                }
+                return <td key={`tbody-${dataSourceIndex}-${index}`}>
+                  {content}
+                </td>
               })
-            } */}
+            }
 
           </tr>)
 

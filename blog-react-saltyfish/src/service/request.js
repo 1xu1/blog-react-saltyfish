@@ -8,8 +8,8 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    if (this?.window?.sessionStorage && sessionStorage.getItem("token")) {
-      config.headers["Authorization"] = sessionStorage.getItem("token");
+    if (sessionStorage && sessionStorage.getItem("token")) {
+      config.headers["Authorization"] = JSON.parse(sessionStorage.getItem("token"));
     }
     return config;
   },
@@ -23,6 +23,7 @@ service.interceptors.response.use(
     const res = response.data;
     if (res.error) {
       message.error(res.error);
+      return Promise.reject(res.error);
     }
     return res;
   },

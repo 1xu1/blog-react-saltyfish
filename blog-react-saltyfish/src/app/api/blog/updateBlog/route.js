@@ -10,7 +10,7 @@ export async function POST(request) {
   const {
     id,
     blogContent,
-    blogLable,
+    blogLabel,
     blogTitle,
     blogVisibility
   } = await request.json()
@@ -23,18 +23,19 @@ export async function POST(request) {
     if (!checkTokenUserId(token, blogWriter)) {
       return NextResponse.json({ error: '您无编辑权限' })
     }
-    await db
+    const blog = await db
       .update(m_blog)
       .set({
         blogContent: blogContent,
-        blogLabel: blogLable,
+        blogLabel: blogLabel,
         blogVisibility: blogVisibility,
         blogTitle: blogTitle,
         blogTime: new Date(),
       })
       .where(eq(m_blog.id, id))
+      .returning()
 
-    return NextResponse.json({ data: 'success' })
+    return NextResponse.json({ data: blog[0] })
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: error?.message ?? error }, { status: 500 })
