@@ -35,7 +35,7 @@ const checkTokenRole = (token, userRole) => {
 const checkTokenUserId = (token, uid) => {
   try {
     const id = checkToken(token)?.id
-    return id === uid
+    return id == uid
   }
   catch (err) {
     console.log('err---', err)

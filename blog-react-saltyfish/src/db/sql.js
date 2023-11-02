@@ -153,3 +153,20 @@ export async function insertUserByGithubUserInfo(userInfo) {
     });
   return data[0]
 }
+
+// 查找
+export async function getBlogList(limit = 10, offset = 0) {
+  const {
+    // eslint-disable-next-line no-unused-vars
+    blogContent,
+    ...rest
+  } = m_blog
+  const data = await db.select({
+    ...rest
+  }).from(m_blog)
+    .orderBy(desc(m_blog.blogTime))
+    .limit(limit)
+    .offset(offset)
+
+  return data
+}

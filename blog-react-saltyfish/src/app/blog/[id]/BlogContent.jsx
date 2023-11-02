@@ -1,4 +1,4 @@
-import { CustomMDX } from '@/components/mdx-remote'
+import { CustomMDX } from '@/components/Mdx/mdx-remote'
 import { transBlogContent } from '@/lib/utils'
 
 

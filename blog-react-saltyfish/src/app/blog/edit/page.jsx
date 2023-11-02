@@ -39,15 +39,7 @@ export default function BlogEditor(props) {
 
     if (!id) return
 
-    getBlog({ id }).then(res => {
-      const blog = res.data
-      const blogContent = (transBlogContent(blog?.blogContent ?? ''))
-      setBlogContent(blogContent)
-      setBlogTitle(blog?.blogTitle ?? '')
-      setBlogLabel(blog?.blogLabel ?? '')
-      setBlogVisibility(blog?.blogVisibility)
-      editor.setValue(blogContent)
-    })
+    refreshBlog()
   }, []);
 
 
@@ -93,14 +85,31 @@ export default function BlogEditor(props) {
     if (!isLoading) {
       setIsLoading(true)
       updateBlog(param)
-        .then(() => {
+        .then((res) => {
           const msg = blogVisibility === 0 ? '隐藏成功' : '发布成功'
+          setAllData(res.data)
           message.success(msg)
         })
         .finally(() => {
           setIsLoading(false)
         })
     }
+  }
+
+  const setAllData = (blog) => {
+    const blogContent = (transBlogContent(blog?.blogContent ?? ''))
+    setBlogContent(blogContent)
+    setBlogTitle(blog?.blogTitle ?? '')
+    setBlogLabel(blog?.blogLabel ?? '')
+    setBlogVisibility(blog?.blogVisibility)
+    viditor.current.setValue(blogContent)
+  }
+
+  const refreshBlog = () => {
+    getBlog({ id }).then(res => {
+      const blog = res.data
+      setAllData(blog)
+    })
   }
 
   const createBlog = () => {
