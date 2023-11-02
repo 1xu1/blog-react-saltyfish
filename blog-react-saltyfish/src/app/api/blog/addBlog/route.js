@@ -14,7 +14,7 @@ export async function POST(request) {
   const headersList = headers()
   const token = headersList.get('Authorization')
   try {
-    if (checkTokenRole(token, 'admin')) {
+    if (!checkTokenRole(token, 'admin')) {
       return NextResponse.json({ error: '您无新增权限' })
     }
     const data = await db.insert(m_blog)
