@@ -1,7 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { addWebSiteRead } from '@/db/sql'
 import { Analytics } from '@vercel/analytics/react';
+import WebsiteCounter from '@/components/WebsiteCounter/index'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,12 +11,12 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  addWebSiteRead()
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
         {children}
         <Analytics />
+        <WebsiteCounter />
       </body>
     </html>
   )

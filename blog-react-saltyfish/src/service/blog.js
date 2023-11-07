@@ -20,3 +20,6 @@ export const updateBlog = (params) => {
 export const updateBlogVis = (params) => {
   return request.post("/blog/updateBlogVis", params);
 };
+export const addRead = (params) => {
+  return request.post("/blog/addRead", params);
+};

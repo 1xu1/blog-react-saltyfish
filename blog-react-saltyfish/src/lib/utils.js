@@ -55,3 +55,17 @@ export function randomString() {
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return result;
 }
+
+// 防抖
+export function debounce(fn, delay = 1000) {
+    let time = null;
+    function _debounce(...args) {
+        if (time !== null) {
+            clearTimeout(time)
+        }
+        time = setTimeout(() => {
+            fn.apply(this, args)
+        }, delay);
+    }
+    return _debounce
+}

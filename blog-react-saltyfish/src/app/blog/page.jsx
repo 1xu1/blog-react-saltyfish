@@ -20,7 +20,7 @@ async function getData(firstLoadingSize, label = '') {
 }
 
 export default async function Page(props) {
-  const firstLoadingSize = 20
+  const firstLoadingSize = 10
   const {
     searchParams
   } = props
