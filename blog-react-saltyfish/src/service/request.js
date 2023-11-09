@@ -1,6 +1,7 @@
 /*global Promise */
 import axios from "axios";
 import message from "@/components/Notifications/Message";
+import { isServer } from '@/lib/utils.js'
 
 const service = axios.create({
   baseURL: process.env.APP_HOST + '/api' ,
@@ -8,7 +9,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    if (this?.window && sessionStorage.getItem("token")) {
+    if (!isServer() && sessionStorage.getItem("token")) {
       config.headers["Authorization"] = JSON.parse(sessionStorage.getItem("token"));
     }
     return config;

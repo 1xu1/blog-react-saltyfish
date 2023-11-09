@@ -69,3 +69,6 @@ export function debounce(fn, delay = 1000) {
     }
     return _debounce
 }
+
+// 判断是否为服务端
+export const isServer = () => typeof window === 'undefined'
