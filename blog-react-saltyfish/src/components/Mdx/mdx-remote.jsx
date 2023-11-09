@@ -44,14 +44,20 @@ const components = {
   },
   li: (props) => (
     <li {...props} className=" ml-4 leading-7">
-      <span className=' mr-2 text-xl'>·</span>{props.children}
+      <span className=' mr-2 text-xl'>·</span>
+      <span className=' inline'>{props.children}</span>
     </li>
   ),
   p: (props) => (
     <p {...props} className=" my-5">
       {props.children}
     </p>
-  )
+  ),
+  img: (props) => (
+    <img {...props} referrerpolicy="no-referrer">
+      {props.children}
+    </img>
+  ),
 }
 
 export function CustomMDX(props) {
