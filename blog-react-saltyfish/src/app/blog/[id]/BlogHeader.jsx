@@ -15,9 +15,9 @@ export default async function BlogHeader(props) {
     <div >
       <p className=' text-4xl font-extrabold my-4'>{blogTitle}</p>
       <p className='text-sm text-slate-600'>{getFormatTime(blogTime)}</p>
-      <p className='flex flex-row leading-6 text-slate-700'>
+      <p className='flex flex-row leading-6 text-slate-700 my-2'>
         {blogLabelArr.map((item, index) => {
-          return <a key={index} className='slate me-2 px-2 py-1 hover:bg-cyan-50 border rounded-md border-inherit transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
+          return <a key={index} className='slate me-2 px-2 py-1 hover:bg-cyan-50 hover:border rounded-md border-inherit transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
             <span className=' text-cyan-400'>#</span>
             {`${item}`}
           </a>

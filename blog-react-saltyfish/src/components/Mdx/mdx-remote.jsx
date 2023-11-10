@@ -43,9 +43,8 @@ const components = {
     </pre>
   },
   li: (props) => (
-    <li {...props} className=" ml-4 leading-7">
-      <span className=' mr-2 text-xl'>·</span>
-      <span className=' inline'>{props.children}</span>
+    <li {...props} className=" ml-4 leading-7 list-disc">
+      {props.children}
     </li>
   ),
   p: (props) => (
