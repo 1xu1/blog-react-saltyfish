@@ -51,7 +51,7 @@ export default async function Page() {
       title: '操作',
       render: (text, record) => {
         return (
-          <Link href={`/blog/edit?id=${record.id}`}>编辑</Link>
+          <Link className='text-sky-500' href={`/blog/edit?id=${record.id}`}>编辑</Link>
         )
       }
     },
@@ -60,9 +60,11 @@ export default async function Page() {
   return (
     <MainLayout>
       <Table
+        className='mx-auto'
         dataSource={data}
         columns={columns}
       />
+      
     </MainLayout>
   )
 }
