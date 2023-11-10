@@ -1,9 +1,7 @@
 "use client"
 
-import "vditor/dist/index.css";
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from 'next/navigation'
-import Vditor from "vditor";
 import { getBlog, updateBlog, addBlog } from '@/service/blog.js'
 import { transBlogContent } from '@/lib/utils'
 
@@ -12,8 +10,10 @@ import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import message from "@/components/Notifications/Message";
 
+import { MdEditor } from 'md-editor-rt';
+import 'md-editor-rt/lib/style.css';
+
 export default function BlogEditor(props) {
-  const viditor = useRef(null);
   // eslint-disable-next-line no-unused-vars
   const [blogContent, setBlogContent] = useState('');
   const [blogTitle, setBlogTitle] = useState('');
@@ -31,14 +31,6 @@ export default function BlogEditor(props) {
   const { id } = searchParams
 
   useEffect(() => {
-    const editor = new Vditor("vditor", {
-      mode: 'sv',
-      width: '80%'
-    });
-    viditor.current = editor
-
-    if (!id) return
-
     refreshBlog()
   }, []);
 
@@ -60,7 +52,7 @@ export default function BlogEditor(props) {
   const saveBlog = () => {
     const param = {
       id: id,
-      blogContent: viditor.current.getValue(),
+      blogContent: blogContent,
       blogTitle: blogTitle,
       blogLabel: blogLabel,
       blogVisibility: blogVisibility
@@ -102,7 +94,6 @@ export default function BlogEditor(props) {
     setBlogTitle(blog?.blogTitle ?? '')
     setBlogLabel(blog?.blogLabel ?? '')
     setBlogVisibility(blog?.blogVisibility)
-    viditor.current.setValue(blogContent)
   }
 
   const refreshBlog = () => {
@@ -138,8 +129,6 @@ export default function BlogEditor(props) {
       </div>
     </div>
 
-    <div className="flex min-h-screen flex-row justify-center w-full md:w-auto">
-      <div id="vditor" />
-    </div>
+    <MdEditor modelValue={blogContent} onChange={setBlogContent} />
   </MainLayout>;
 }

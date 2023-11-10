@@ -11,21 +11,22 @@ import React from 'react';
 export default function Table(props) {
   const {
     columns,
-    dataSource
+    dataSource,
+    className
   } = props
 
   return (
-    <table>
-      <thead>
+    <table className={`border-collapse border border-slate-400 ${className}`}>
+      <thead className='bg-slate-50'>
         <tr>
           {columns.map((column, index) => {
-            return <td key={`thead-${index}`}>
+            return <th className='border border-slate-300 p-4 text-slate-900 text-left' key={`thead-${index}`}>
               {column.title}
-            </td>
+            </th>
           })}
         </tr>
       </thead>
-      <tbody>
+      <tbody className='bg-white'>
         {dataSource.map((data, dataSourceIndex) => {
 
           return (<tr key={`tr-${dataSourceIndex}`}>
@@ -38,7 +39,7 @@ export default function Table(props) {
                 else{
                   content = (data[column.dataIndex] || '').toString()
                 }
-                return <td key={`tbody-${dataSourceIndex}-${index}`}>
+                return <td className='border border-slate-300 p-2' key={`tbody-${dataSourceIndex}-${index}`}>
                   {content}
                 </td>
               })
