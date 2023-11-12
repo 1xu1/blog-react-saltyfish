@@ -28,7 +28,7 @@ export default async function Page(props) {
   const { label } = searchParams
 
   const {
-    blogList, 
+    blogList,
     labelCloud
   } = await getData(firstLoadingSize, label) || {}
 
@@ -50,6 +50,8 @@ export default async function Page(props) {
           })}
           <LoadingMore searchParams={searchParams} firstLoadingSize={firstLoadingSize} />
         </div>
+        <aside className='max-lg:hidden w-1/4 max-w-xs'>
+        </aside>
         <div>
         </div>
         <ScrollToTop />

@@ -3,11 +3,12 @@ import { addBlogLike } from '@/db/sql.js'
 
 export async function POST(request) {
   const {
-    id
+    id,
+    num
   } = await request.json()
 
   try {
-    await addBlogLike(id)
+    await addBlogLike(id, num)
     return NextResponse.json({ data: 'success' })
   } catch (error) {
     console.error(error)
