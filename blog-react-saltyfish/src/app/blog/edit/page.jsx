@@ -118,6 +118,7 @@ export default function BlogEditor(props) {
   }
 
   return <MainLayout>
+    <div className=" h-full">
     <div className="flex flex-row justify-center md:w-auto bg-white py-5">
       <span className="max-w-xs mx-5"><Input label={'标题'} value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)}></Input></span>
       <span className="max-w-xs mx-5"><Input label={'标签'} value={blogLabel} placeholder={'#分割标签'} onChange={(e) => setBlogLabel(e.target.value)}></Input></span>
@@ -129,6 +130,7 @@ export default function BlogEditor(props) {
       </div>
     </div>
 
-    <MdEditor modelValue={blogContent} onChange={setBlogContent} />
+    <MdEditor modelValue={blogContent} onChange={setBlogContent} style={{height: '100%'}}/>
+    </div>
   </MainLayout>;
 }

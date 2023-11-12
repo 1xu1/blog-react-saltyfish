@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         {children}
         <Analytics />
-        <WebsiteCounter />
+        <WebsiteCounter id={0} />
       </body>
     </html>
   )

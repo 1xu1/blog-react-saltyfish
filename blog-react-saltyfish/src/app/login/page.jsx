@@ -1,8 +1,7 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from 'next/navigation'
 import { loginByGithub } from "@/service/user"
-import message from "@/components/Notifications/Message";
 
 const PLAT_LOGIN_URL = {
   github: loginByGithub
@@ -16,12 +15,14 @@ export default function BlogEditor(props) {
   } = props
   const { code, plat } = searchParams
 
+  const [msg, setMsg] = useState('稍等，正在为您的登陆跳转中')
+
   useEffect(() => {
     if (code) {
       login(code, plat)
     }
     else {
-      message.err('失败，请稍后重试---')
+      setMsg('哎呀，看起来登陆失败了')
     }
   }, [])
 
@@ -32,15 +33,46 @@ export default function BlogEditor(props) {
       sessionStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
       router.push('/')
     })
-    .catch(err=>{
-      console.log('err---', err)
-      message.err('失败，请稍后重试---' + err)
-    })
+      .catch(err => {
+        console.log('err---', err)
+        setMsg('哎呀，看起来登陆失败了')
+      })
   }
 
 
 
-  return <div>
-    登录中...
-  </div>
+  return <body>
+    <div className=" w-full h-full flex items-center justify-center absolute">
+      <div className=" items-center justify-center flex flex-col">
+          <svg className=" w-12 h-16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="24px" height="30px" viewBox="0 0 24 30" style={{enableBackground:'new 0 0 50 50'}} xmlSpace="preserve">
+            <rect className="fill-cyan-400" x="0" y="13" width="4" height="5" fill="#333">
+              <animate attributeName="height" attributeType="XML"
+                values="5;21;5"
+                begin="0s" dur="0.6s" repeatCount="indefinite" />
+              <animate attributeName="y" attributeType="XML"
+                values="13; 5; 13"
+                begin="0s" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+            <rect className="fill-cyan-400" x="10" y="13" width="4" height="5" fill="#333">
+              <animate attributeName="height" attributeType="XML"
+                values="5;21;5"
+                begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+              <animate attributeName="y" attributeType="XML"
+                values="13; 5; 13"
+                begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+            <rect className="fill-cyan-400" x="20" y="13" width="4" height="5" fill="#333">
+              <animate attributeName="height" attributeType="XML"
+                values="5;21;5"
+                begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+              <animate attributeName="y" attributeType="XML"
+                values="13; 5; 13"
+                begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+          </svg>
+        <span>{msg}</span>
+      </div>
+    </div>
+  </body>
 }

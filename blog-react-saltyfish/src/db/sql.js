@@ -47,11 +47,11 @@ export async function addBlogRead(blogId) {
   return true
 }
 
-export async function addBlogLike(blogId) {
+export async function addBlogLike(blogId, num) {
   await db
     .update(m_blog)
     .set({
-      blogLike: sql`${m_blog.blogLike} + 1`
+      blogLike: sql`${m_blog.blogLike} + ${num}`
     })
     .where(eq(m_blog.id, blogId))
   return true
@@ -103,8 +103,8 @@ export async function getCommentMaxFloor(blogId) {
   return maxFloor[0].floor
 }
 
-export async function addWebSiteRead() {
-  return addBlogRead(0)
+export async function addWebSiteRead(id) {
+  return addBlogRead(id)
 }
 
 // 根据github的用户id查找用户信息
