@@ -34,21 +34,6 @@ export default function BlogEditor(props) {
     refreshBlog()
   }, []);
 
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleClickKey, false);
-    return () => {
-      window.removeEventListener("keydown", handleClickKey, false);
-    };
-  }, [blogTitle, blogLabel, blogVisibility]);
-
-  const handleClickKey = (e) => {
-    if ((e.key == 's' || e.key == 'S') && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-      e.preventDefault();
-      saveBlog()
-    }
-  }
-
   const saveBlog = () => {
     const param = {
       id: id,
@@ -130,7 +115,7 @@ export default function BlogEditor(props) {
       </div>
     </div>
 
-    <MdEditor modelValue={blogContent} onChange={setBlogContent} style={{height: '100%'}}/>
+    <MdEditor modelValue={blogContent} onChange={setBlogContent} onSave={saveBlog} style={{height: '100%'}}/>
     </div>
   </MainLayout>;
 }
