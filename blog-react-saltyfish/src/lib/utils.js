@@ -42,7 +42,7 @@ function getWindowHeight() {
 }
 
 export function isScrollButtom() {
-    if (getScrollTop() + getWindowHeight() == getScrollHeight()) {
+    if (Math.floor(getScrollTop() + getWindowHeight() + 1) >= getScrollHeight()) {
         return true
     }
 }
