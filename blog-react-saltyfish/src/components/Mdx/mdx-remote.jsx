@@ -33,12 +33,12 @@ const components = {
     </h2>
   ),
   code: (props) => (
-    <code {...props} className="text-base text-white rounded-sm p-1 -z-10" style={{background:'#282c34'}}>
+    <code {...props} className="text-base text-sky-600 rounded-sm p-1 -z-10 bg-sky-100">
       {props.children}
     </code>
   ),
   pre: (props) => {
-    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2" style={{background:'#282c34'}}>
+    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2 bg-sky-100">
       {props.children}
     </pre>
   },
