@@ -115,7 +115,7 @@ export default function BlogEditor(props) {
       </div>
     </div>
 
-    <MdEditor modelValue={blogContent} onChange={setBlogContent} onSave={saveBlog} style={{height: '100%'}}/>
+    <MdEditor modelValue={blogContent} onChange={setBlogContent} onSave={saveBlog} style={{height: '80vh'}}/>
     </div>
   </MainLayout>;
 }

@@ -57,6 +57,11 @@ const components = {
       {props.children}
     </img>
   ),
+  a: (props) => (
+    <a {...props} className=' text-sky-600 hover:text-lime-600'>
+      {props.children}
+    </a>
+  ),
 }
 
 export function CustomMDX(props) {
