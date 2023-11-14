@@ -21,7 +21,6 @@ export default function LoadingMore(props) {
   useEffect(() => {
     window.onscrollend = () => {
       if (isScrollButtom()) {
-        console.log(111111111)
         setRefresh(prevValue => {
           return !prevValue
         })
