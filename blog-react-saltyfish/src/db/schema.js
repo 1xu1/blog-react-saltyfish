@@ -34,7 +34,7 @@ export const m_comment = pgTable('m_comment', {
     floor: integer('floor'),
     blogId: bigint('blog_id', { mode: 'number' }),
     content: varchar('content'),
-    link: varchar('link'),
     createTime: timestamp('create_time').defaultNow(),
     userId: bigint('user_id', { mode: 'number' }),
+    replyId: bigint('reply_id', { mode: 'number' }),
 });

@@ -71,7 +71,11 @@ export async function getBlogComment(blogId) {
   const comments = await db
     .select(m_comment)
     .from(m_comment)
-    .where(eq(m_comment.blogId, blogId))
+    .rightJoin(m_user)
+    .where(
+      eq(m_comment.blogId, blogId),
+      eq(m_comment.userId, m_user.id)
+    )
   return comments
 }
 
@@ -80,8 +84,6 @@ export async function addComment(comment) {
   const data = await db.insert(m_comment)
     .values({
       content: comment.content,
-      userName: comment.userName,
-      link: comment.link,
       userId: comment.userId,
       blogId: comment.blogId,
       floor: maxFloor,
