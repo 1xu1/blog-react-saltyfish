@@ -5,7 +5,7 @@ import { getGithubLoginUrl } from '@/lib/authorize'
 import { getBlogComment, addComment } from '@/service/comment'
 import Comment from './Comment';
 import message from "@/components/Notifications/Message";
-
+import LoadingBlock from '@/components/LoadingBlock'
 
 export default async function CommentBlock(props) {
   const {
@@ -14,21 +14,30 @@ export default async function CommentBlock(props) {
 
   const [comments, setComments] = useState([])
   const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getBlogComment({ id: blogId })
-      .then(res => {
-        setComments(res)
-      })
+    refersh()
   }, [])
 
+  const refersh = () => {
+    setLoading(true)
+    getBlogComment({ id: blogId })
+      .then(res => {
+        console.log('res---', res)
+        setComments(res.data)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
 
   const handleAddComment = () => {
     addComment({
       content: content,
       blogId: blogId
     })
-      .then(res => {
+      .then(() => {
         message.success('评论成功')
       })
       .catch(err => {
@@ -38,14 +47,17 @@ export default async function CommentBlock(props) {
 
 
   return <div className='mx-auto w-full max-w-3xl bg-white p-8 my-4'>
-    <textarea onChange={setContent} className=' w-full bg-slate-100 border rounded-sm h-24 p-2 focus:bg-slate-50 focus:border-cyan-500'></textarea>
+    <textarea value={content} onChange={(e) => { console.log(e.target); setContent(e.target.value) }}
+      className=' resize-none w-full bg-slate-100 border rounded-sm h-24 p-2 focus:bg-slate-50 focus:border focus:border-cyan-500'></textarea>
     <p className='flex flex-row-reverse items-center'>
       <Button onClick={handleAddComment}>评论</Button>
       <a className=' mx-2' href={getGithubLoginUrl()}>Github登录</a>
     </p>
 
-    {comments.map((comment) => {
-      return <Comment key={comment.id} {...comment}></Comment>
-    })}
+    <LoadingBlock loading={loading}>
+      {comments.map((comment) => {
+        return <Comment key={comment.id} {...comment}></Comment>
+      })}
+    </LoadingBlock>
   </div>
 }

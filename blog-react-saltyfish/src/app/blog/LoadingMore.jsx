@@ -30,7 +30,7 @@ export default function LoadingMore(props) {
 
   // 加载事件
   useEffect(() => {
-    if(loading) return
+    if (loading) return
     setLoading(true)
     loadingEvent()
   }, [refresh])
@@ -63,13 +63,13 @@ export default function LoadingMore(props) {
       />
     })}
     {
-      loading && <div class="w-full border-y bg-white hover:shadow p-5 mb-2">
-        <div class="animate-pulse flex max-w-2xl w-full mx-auto">
-          <div class="flex-1 space-y-3 py-1">
-            <div class="h-4 w-40 bg-slate-200 rounded"></div>
-            <div class="h-2 w-36 bg-slate-200 rounded"></div>
-            <div class="h-2 w-72 bg-slate-200 rounded"></div>
-            <div class="h-2 w-32 bg-slate-200 rounded"></div>
+      loading && <div className="w-full border-y bg-white hover:shadow p-5 mb-2">
+        <div className="animate-pulse flex max-w-2xl w-full mx-auto">
+          <div className="flex-1 space-y-3 py-1">
+            <div className="h-4 w-40 bg-slate-200 rounded"></div>
+            <div className="h-2 w-36 bg-slate-200 rounded"></div>
+            <div className="h-2 w-72 bg-slate-200 rounded"></div>
+            <div className="h-2 w-32 bg-slate-200 rounded"></div>
           </div>
         </div>
       </div>

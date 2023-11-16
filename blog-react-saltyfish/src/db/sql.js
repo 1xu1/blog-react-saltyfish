@@ -71,10 +71,9 @@ export async function getBlogComment(blogId) {
   const comments = await db
     .select(m_comment)
     .from(m_comment)
-    .rightJoin(m_user)
+    .rightJoin(m_user, eq(m_comment.userId, m_user.id))
     .where(
-      eq(m_comment.blogId, blogId),
-      eq(m_comment.userId, m_user.id)
+      eq(m_comment.blogId, blogId)
     )
   return comments
 }
