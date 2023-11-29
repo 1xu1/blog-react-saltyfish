@@ -9,5 +9,5 @@ export const deleteComment = (params) => {
   return request.post("/admin/deleteComment", params);
 };
 export const addComment = (params) => {
-  return request.post("comment/addComment", params);
+  return request.post("/api/comment/addComment", params);
 };

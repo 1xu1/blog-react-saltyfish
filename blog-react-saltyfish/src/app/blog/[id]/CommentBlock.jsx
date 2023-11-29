@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import React ,{ useEffect, useState } from 'react'
 import Button from "@/components/Button/Button";
 import { getGithubLoginUrl } from '@/lib/authorize'
 import { getBlogComment, addComment } from '@/service/comment'
@@ -13,15 +13,14 @@ export default async function CommentBlock(props) {
   } = props
 
   const [comments, setComments] = useState([])
-  const [content, setContent] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [content, setContent] = useState('123231')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     refersh()
-  }, [])
+  })
 
   const refersh = () => {
-    setLoading(true)
     getBlogComment({ id: blogId })
       .then(res => {
         console.log('res---', res)
@@ -33,12 +32,14 @@ export default async function CommentBlock(props) {
   }
 
   const handleAddComment = () => {
+    setLoading(true)
     addComment({
       content: content,
       blogId: blogId
     })
       .then(() => {
         message.success('评论成功')
+        refersh()
       })
       .catch(err => {
         message.error('评论失败:' + err)
@@ -46,11 +47,14 @@ export default async function CommentBlock(props) {
   }
 
 
-  return <div className='mx-auto w-full max-w-3xl bg-white p-8 my-4'>
-    <textarea value={content} onChange={(e) => { console.log(e.target); setContent(e.target.value) }}
+  return <div>
+    <textarea
+      value={content}
+      onChange={e => setContent(e.target.value)}
+      type='text'
       className=' resize-none w-full bg-slate-100 border rounded-sm h-24 p-2 focus:bg-slate-50 focus:border focus:border-cyan-500'></textarea>
     <p className='flex flex-row-reverse items-center'>
-      <Button onClick={handleAddComment}>评论</Button>
+      <Button loading={loading} onClick={handleAddComment}>评论</Button>
       <a className=' mx-2' href={getGithubLoginUrl()}>Github登录</a>
     </p>
 

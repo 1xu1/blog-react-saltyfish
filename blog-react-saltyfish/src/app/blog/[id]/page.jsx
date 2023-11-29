@@ -2,13 +2,13 @@ import { getBlogSql } from '@/app/api/blog/getBlog/route.js'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import BlogContent from './BlogContent'
 import BlogHeader from './BlogHeader'
-import CommentBlock from './CommentBlock'
 import WebsiteCounter from '@/components/WebsiteCounter/index'
 import LeftSide from './LeftSide'
+import CommentBlock from './CommentBlock'
 
 async function getData(params) {
+  const blogId = params['id']
   try {
-    const blogId = params['id']
     const data = await getBlogSql(blogId)
     return data
   } catch (error) {
@@ -38,8 +38,9 @@ export default async function Page({ params }) {
             </BlogContent>
           </div>
 
-          <CommentBlock blogId={blogId}></CommentBlock>
-
+          <div className='mx-auto w-full max-w-3xl bg-white p-8 my-4'>
+            <CommentBlock blogId={blogId}></CommentBlock>
+          </div>
         </div>
         <aside className='max-lg:hidden w-1/4 max-w-xs'>
         </aside>
