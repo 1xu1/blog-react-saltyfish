@@ -1,5 +1,5 @@
 'use client'
-import React ,{ useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from "@/components/Button/Button";
 import { getGithubLoginUrl } from '@/lib/authorize'
 import { getBlogComment, addComment } from '@/service/comment'
@@ -7,18 +7,18 @@ import Comment from './Comment';
 import message from "@/components/Notifications/Message";
 import LoadingBlock from '@/components/LoadingBlock'
 
-export default async function CommentBlock(props) {
+export default function CommentBlock(props) {
   const {
     blogId
   } = props
 
   const [comments, setComments] = useState([])
-  const [content, setContent] = useState('123231')
+  const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     refersh()
-  })
+  }, [])
 
   const refersh = () => {
     getBlogComment({ id: blogId })
@@ -43,12 +43,14 @@ export default async function CommentBlock(props) {
       })
       .catch(err => {
         message.error('评论失败:' + err)
+        setLoading(false)
       })
   }
 
 
   return <div>
     <textarea
+      placeholder='评论内容'
       value={content}
       onChange={e => setContent(e.target.value)}
       type='text'

@@ -31,7 +31,6 @@ export const m_user = pgTable('m_user', {
 export const m_comment = pgTable('m_comment', {
     id: serial('id').primaryKey(),
     like: integer('like'),
-    floor: integer('floor'),
     blogId: bigint('blog_id', { mode: 'number' }),
     content: varchar('content'),
     createTime: timestamp('create_time').defaultNow(),

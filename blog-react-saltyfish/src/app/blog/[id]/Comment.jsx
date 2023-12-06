@@ -1,5 +1,5 @@
 import { getFormatTime } from '@/lib/time.js'
-export default async function Comment(props) {
+export default function Comment(props) {
   const {
     avaterUrl,
     content,
