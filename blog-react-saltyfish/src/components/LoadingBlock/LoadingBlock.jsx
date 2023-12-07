@@ -38,7 +38,7 @@ export default function LoadingBlock(props) {
           {text && <span>text</span>}
         </span>
       </div>}
-      <div className=" opacity-50 select-none pointer-events-none">
+      <div className={loading ? 'opacity-50 select-none pointer-events-none ' : ''}>
         {props.children}
       </div>
     </div>

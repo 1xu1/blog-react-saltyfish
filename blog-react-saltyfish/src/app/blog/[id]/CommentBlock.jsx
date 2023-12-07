@@ -14,7 +14,7 @@ export default function CommentBlock(props) {
 
   const [comments, setComments] = useState([])
   const [content, setContent] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     refersh()
@@ -39,6 +39,7 @@ export default function CommentBlock(props) {
     })
       .then(() => {
         message.success('评论成功')
+        setContent('')
         refersh()
       })
       .catch(err => {
@@ -54,8 +55,8 @@ export default function CommentBlock(props) {
       value={content}
       onChange={e => setContent(e.target.value)}
       type='text'
-      className=' resize-none w-full bg-slate-100 border rounded-sm h-24 p-2 focus:bg-slate-50 focus:border focus:border-cyan-500'></textarea>
-    <p className='flex flex-row-reverse items-center'>
+      className=' resize-none w-full bg-slate-100 border rounded-sm h-24 p-2 focus:bg-slate-50 focus:border focus:border-cyan-700 outline-none	'></textarea>
+    <p className='flex flex-row-reverse items-center mb-4'>
       <Button loading={loading} onClick={handleAddComment}>评论</Button>
       <a className=' mx-2' href={getGithubLoginUrl()}>Github登录</a>
     </p>

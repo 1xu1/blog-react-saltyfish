@@ -69,7 +69,12 @@ export async function getBlogLabels() {
 
 export async function getBlogComment(blogId) {
   const comments = await db
-    .select(m_comment)
+    .select({
+      ...m_comment,
+      avaterUrl: m_user.avaterUrl,
+      name: m_user.userName,
+      userId: m_user.id
+    })
     .from(m_comment)
     .leftJoin(m_user, eq(m_comment.userId, m_user.id))
     .where(
@@ -85,7 +90,7 @@ export async function addComment(comment) {
       content: comment.content,
       userId: comment.userId,
       blogId: comment.blogId,
-      like: 0
+      like: 0,
     })
     .returning(m_comment);
   return data[0]

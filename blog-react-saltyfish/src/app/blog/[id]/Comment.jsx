@@ -4,12 +4,14 @@ export default function Comment(props) {
     avaterUrl,
     content,
     name,
-    time
+    time,
   } = props
-  return <div className=' w-full p-2'>
-    <img alt="头像" className=" h-8 rounded-full" referrerpolicy="no-referrer" loading="lazy" src={avaterUrl} />
-    <span>{name}</span>
-    <span>{getFormatTime(time)}</span>
+  return <div className=' w-full p-2 flex flex-col border-t'>
+    <div className=' flex flex-row items-center gap-4'>
+      {avaterUrl && <img alt="头像" className="w-8 h-8 rounded-full" referrerpolicy="no-referrer" loading="lazy" src={avaterUrl} />}
+      <span>{name ?? '游客'}</span>
+      <span>{getFormatTime(time)}</span>
+    </div>
     <span>{content}</span>
   </div>
 }

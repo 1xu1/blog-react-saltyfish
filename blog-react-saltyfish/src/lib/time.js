@@ -28,6 +28,7 @@ function getLastDate(time) {
     return `${date.getFullYear()}-${month}-${day}  ${hours}:${minutes}:${seconds}`
 }
 export function getFormatTime(timestamp) {
+    if(!timestamp) return ''
     timestamp = new Date(timestamp);
     const now = getUnix();
     const timestamp1 = timestamp.getTime();
