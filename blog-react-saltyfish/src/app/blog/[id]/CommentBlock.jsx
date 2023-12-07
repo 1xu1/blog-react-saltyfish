@@ -34,9 +34,11 @@ export default function CommentBlock(props) {
   const handleAddComment = () => {
     if (content.length > 255) {
       message.error('评论内容不能超过255个字符')
+      return
     }
     if (!content || content.length === 0) {
       message.error('评论内容不能为空')
+      return
     }
     setLoading(true)
     addComment({
