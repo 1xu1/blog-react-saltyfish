@@ -53,7 +53,7 @@ const components = {
     </p>
   ),
   img: (props) => (
-    <img {...props} referrerpolicy="no-referrer">
+    <img {...props} loading="lazy" referrerPolicy="no-referrer">
       {props.children}
     </img>
   ),

@@ -6,8 +6,6 @@ import { headers } from 'next/headers'
 export async function POST(request) {
   const {
     content,
-    userName,
-    link,
     blogId
   } = await request.json()
   const headersList = headers()
@@ -19,8 +17,6 @@ export async function POST(request) {
     }
     const data = addComment({
       content,
-      userName,
-      link,
       userId,
       blogId
     })

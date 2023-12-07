@@ -1,6 +1,6 @@
 import { db } from '@/db/index.js'
 import { m_user, m_blog, m_comment } from '@/db/schema.js'
-import { eq, and, desc, sql } from "drizzle-orm";
+import { eq, and, desc, asc, sql } from "drizzle-orm";
 import { randomString } from '@/lib/utils.js'
 
 export async function getUserSql(name, password) {
@@ -69,23 +69,28 @@ export async function getBlogLabels() {
 
 export async function getBlogComment(blogId) {
   const comments = await db
-    .select(m_comment)
+    .select({
+      ...m_comment,
+      avaterUrl: m_user.avaterUrl,
+      name: m_user.userName,
+      userId: m_user.id
+    })
     .from(m_comment)
-    .where(eq(m_comment.blogId, blogId))
+    .leftJoin(m_user, eq(m_comment.userId, m_user.id))
+    .where(
+      eq(m_comment.blogId, blogId)
+    )
+    .orderBy(asc(m_comment.createTime))
   return comments
 }
 
 export async function addComment(comment) {
-  const maxFloor = await getCommentMaxFloor(comment.blogId)
   const data = await db.insert(m_comment)
     .values({
       content: comment.content,
-      userName: comment.userName,
-      link: comment.link,
       userId: comment.userId,
       blogId: comment.blogId,
-      floor: maxFloor,
-      like: 0
+      like: 0,
     })
     .returning(m_comment);
   return data[0]

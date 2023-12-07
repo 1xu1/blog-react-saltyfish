@@ -4,7 +4,7 @@ export default async function BlogHeader(props) {
   const {
     blogTitle,
     blogTime,
-    blogLabel,
+    blogLabel = '',
     blogRead,
   } = props.blog
 
