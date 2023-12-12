@@ -37,3 +37,14 @@ export const m_comment = pgTable('m_comment', {
     userId: bigint('user_id', { mode: 'number' }),
     replyId: bigint('reply_id', { mode: 'number' }),
 });
+
+export const m_share = pgTable('m_comment', {
+    id: integer('id').primaryKey(),
+    like: integer('like'),
+    title: varchar('title'),
+    description: varchar('description'),
+    url: varchar('url'),
+    icon: varchar('icon'),
+    label: varchar('label'),
+    createTime: timestamp('create_time').defaultNow(),
+});

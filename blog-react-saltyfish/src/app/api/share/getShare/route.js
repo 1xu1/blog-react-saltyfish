@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
-import { getBlogComment } from '@/db/sql.js'
+import { selectShare } from '@/db/sql.js'
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
 
-  const blogId = searchParams.get('id')
-  const offset = searchParams.get('offset') ?? 0
-  let limit = searchParams.get('limit') ?? 100
+  let limit = searchParams.get('limit') || 10
+  const offset = searchParams.get('offset') || 0
+  const label = searchParams.get('label') || ''
   if (limit > 100) {
     limit = 100
   }
 
   try {
-    const data = await getBlogComment(blogId, limit, offset)
+    const data = await selectShare(limit, offset, label)
     return NextResponse.json({ data })
   } catch (error) {
     console.error(error)
