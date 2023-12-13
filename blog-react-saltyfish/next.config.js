@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+  })
+
 const nextConfig = {
     env: {
         APP_TITTLE: process.env.APP_TITTLE,
@@ -32,4 +37,4 @@ const nextConfig = {
     },
 }
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)

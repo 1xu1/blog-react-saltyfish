@@ -1,6 +1,6 @@
 import { db } from '@/db/index.js'
-import { m_user, m_blog, m_comment } from '@/db/schema.js'
-import { eq, and, desc, asc, sql } from "drizzle-orm";
+import { m_user, m_blog, m_comment, m_share } from '@/db/schema.js'
+import { eq, and, desc, asc, sql, like } from "drizzle-orm";
 import { randomString } from '@/lib/utils.js'
 
 export async function getUserSql(name, password) {
@@ -67,7 +67,7 @@ export async function getBlogLabels() {
   return labels
 }
 
-export async function getBlogComment(blogId) {
+export async function getBlogComment(blogId, limit = 20, offset = 0) {
   const comments = await db
     .select({
       ...m_comment,
@@ -81,6 +81,8 @@ export async function getBlogComment(blogId) {
       eq(m_comment.blogId, blogId)
     )
     .orderBy(asc(m_comment.createTime))
+    .limit(limit)
+    .offset(offset)
   return comments
 }
 
@@ -94,18 +96,6 @@ export async function addComment(comment) {
     })
     .returning(m_comment);
   return data[0]
-}
-
-export async function getCommentMaxFloor(blogId) {
-  const maxFloor = await db
-    .select({
-      floor: m_comment.floor
-    })
-    .from(m_comment)
-    .where(eq(m_comment.blogId, blogId))
-    .orderBy(desc)
-    .limit(1)
-  return maxFloor[0].floor
 }
 
 export async function addWebSiteRead(id) {
@@ -173,5 +163,44 @@ export async function getBlogList(limit = 10, offset = 0) {
     .limit(limit)
     .offset(offset)
 
+  return data
+}
+
+export async function addShare(share) {
+  const data = await db.insert(m_share)
+    .values({
+      like: 0,
+      title: share.title,
+      description: share.description,
+      url: share.url,
+      icon: share.icon,
+      label: share.label,
+    })
+    .returning(m_share);
+  return data[0]
+}
+
+export async function selectShare(limit = 10, offset = 0, label = '') {
+  const data = await db.select()
+    .from(m_share)
+    .where(
+      like(m_share.blogLabel, `%${label}%`))
+    .orderBy(desc(m_share.createTime))
+    .limit(limit)
+    .offset(offset)
+  return data
+}
+
+export async function updateShare(share) {
+  const data = await db.update()
+    .set({
+      title: share.title,
+      description: share.description,
+      url: share.url,
+      icon: share.icon,
+      label: share.label,
+    })
+    .where(eq(m_share.id, share.id))
+    .returning()
   return data
 }

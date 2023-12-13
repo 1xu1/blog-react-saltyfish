@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import style from './index.module.css'
 
 export default function Notification(props) {
   const {
     closable,
     type,
     title,
-    content
+    content,
+    duration
   } = props
 
   const statusIcon = {
@@ -13,11 +15,18 @@ export default function Notification(props) {
     'error': <svg className=' text-red-700 w-6 h-6' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
     'warn': <svg className=' text-yellow-300 w-6 h-6' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>,
     'info': <svg className=' text-blue-500 w-6 h-6' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
-  
   }
 
+  const [animation, setAnimation] = useState('jump-in')
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimation('jump-out')
+    }, duration - 200)
+  }, [])
+
   return (
-    <div className=' shadow-md border border-gray-300 rounded z-50 p-4 bg-white'>
+    <div className={style[animation] + ' shadow-md border border-gray-300 rounded z-50 p-4 bg-white mb-2 transition'}>
       <div className=' flex flex-row items-start'>
         <div>
           {
