@@ -35,7 +35,7 @@ export default function BlogEditor(props) {
     })
       .catch(err => {
         console.log('err---', err)
-        setMsg('哎呀，看起来登陆失败了')
+        setMsg('哎呀，看起来登陆失败了' + err)
       })
   }
 

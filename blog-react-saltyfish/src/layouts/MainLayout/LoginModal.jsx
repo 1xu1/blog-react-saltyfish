@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { login } from '@/service/user.js'
 import { getGithubLoginUrl } from '@/lib/authorize'
+import message from "@/components/Notifications/Message";
 
 export default function LoginModal(props) {
 
@@ -26,10 +27,13 @@ export default function LoginModal(props) {
 
   const handleLogin = () => {
     login(loginForm)
-    .then(res=>{
-      loginCallBack(res?.data ?? {})
-      onClose(false)
-    })
+      .then(res => {
+        loginCallBack(res?.data ?? {})
+        onClose(false)
+      })
+      .catch(err => {
+        message.err('登录失败:' + err)
+      })
   }
 
   return (
@@ -71,7 +75,7 @@ export default function LoginModal(props) {
                         <div>
                           <label className="block text-sm font-medium leading-6 text-gray-900">用户名</label>
                           <div className="mt-2">
-                            <input onChange={(e)=>setLoginFormState({name:e.target.value})} id="name" name="name" type="name" autoComplete="name" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input onChange={(e) => setLoginFormState({ name: e.target.value })} id="name" name="name" type="name" autoComplete="name" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
                           </div>
                         </div>
 
@@ -83,7 +87,7 @@ export default function LoginModal(props) {
                             </div>
                           </div>
                           <div className="mt-2">
-                            <input onChange={(e)=>setLoginFormState({password:e.target.value})} id="password" name="password" type="password" autoComplete="new-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input onChange={(e) => setLoginFormState({ password: e.target.value })} id="password" name="password" type="password" autoComplete="new-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
                           </div>
                         </div>
 

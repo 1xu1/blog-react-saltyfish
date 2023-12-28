@@ -11,7 +11,7 @@ export async function getUserSql(name, password) {
     userLink: m_user.userLink,
     userRole: m_user.userRole,
     userRegisterTime: m_user.userRegisterTime,
-    userHead: m_user.userHead,
+    avaterUrl: m_user.avaterUrl,
     userGender: m_user.userGender,
   })
     .from(m_user)
@@ -111,7 +111,7 @@ export async function selectUserByGithubId(id) {
     userLink: m_user.userLink,
     userRole: m_user.userRole,
     userRegisterTime: m_user.userRegisterTime,
-    userHead: m_user.userHead,
+    avaterUrl: m_user.avaterUrl,
     userGender: m_user.userGender,
   })
     .from(m_user)
@@ -132,7 +132,7 @@ export async function insertUserByGithubUserInfo(userInfo) {
       userEmail: userInfo.email,
       userLink: userInfo.blog,
       userRole: 'User',
-      userHead: userInfo.avatar_url,
+      userHead: userInfo.avaterUrl,
       userPassword: pwd,
       githubUid: userInfo.id
     })
@@ -143,7 +143,7 @@ export async function insertUserByGithubUserInfo(userInfo) {
       userLink: m_user.userLink,
       userRole: m_user.userRole,
       userRegisterTime: m_user.userRegisterTime,
-      userHead: m_user.userHead,
+      userHead: m_user.avaterUrl,
       userGender: m_user.userGender,
     });
   return data[0]
