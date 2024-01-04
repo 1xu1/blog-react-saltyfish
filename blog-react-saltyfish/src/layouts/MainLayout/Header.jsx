@@ -39,8 +39,8 @@ export default function Header() {
   }
 
   useEffect(() => {
-    sessionStorage.getItem('userInfo') && setUserInfo(JSON.parse(sessionStorage.getItem('userInfo') ?? '{}'))
-    sessionStorage.getItem('token') && setLoginStatus(true)
+    localStorage.getItem('userInfo') && setUserInfo(JSON.parse(localStorage.getItem('userInfo') ?? '{}'))
+    localStorage.getItem('token') && setLoginStatus(true)
   }, [])
 
   const loginCallBack = (data) => {
@@ -50,8 +50,8 @@ export default function Header() {
     } = data
 
     setUserInfo(userInfo)
-    window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
-    window.sessionStorage.setItem('token', JSON.stringify(token))
+    window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+    window.localStorage.setItem('token', JSON.stringify(token))
 
     setLoginStatus(true)
   }
