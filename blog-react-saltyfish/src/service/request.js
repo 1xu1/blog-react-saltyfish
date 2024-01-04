@@ -9,8 +9,8 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    if (!isServer() && sessionStorage.getItem("token")) {
-      config.headers["Authorization"] = JSON.parse(sessionStorage.getItem("token"));
+    if (!isServer() && localStorage.getItem("token")) {
+      config.headers["Authorization"] = JSON.parse(localStorage.getItem("token"));
     }
     return config;
   },

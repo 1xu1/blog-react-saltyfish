@@ -29,8 +29,8 @@ export default function BlogEditor(props) {
   const login = (code, plat) => {
     PLAT_LOGIN_URL[plat](`?code=${code}`).then((res) => {
       console.log('res---', res)
-      sessionStorage.setItem('token', JSON.stringify(res.data.token))
-      sessionStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+      localStorage.setItem('token', JSON.stringify(res.data.token))
+      localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
       router.push('/')
     })
       .catch(err => {
