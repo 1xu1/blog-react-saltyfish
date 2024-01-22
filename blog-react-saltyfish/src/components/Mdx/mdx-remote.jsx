@@ -38,7 +38,7 @@ const components = {
     </code>
   ),
   pre: (props) => {
-    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2 bg-sky-100">
+    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2 bg-sky-100 overflow-x-auto">
       {props.children}
     </pre>
   },
