@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --cache"
+    ]
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -31,6 +37,8 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "husky": "^9.0.7",
+    "lint-staged": "^15.2.1",
     "webpack-bundle-analyzer": "^4.10.1"
   }
 }
