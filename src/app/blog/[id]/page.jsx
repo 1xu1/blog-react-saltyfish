@@ -1,3 +1,4 @@
+import { getBlogTitle } from '@/db/sql.js'
 import { getBlogSql } from '@/app/api/blog/getBlog/route.js'
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import BlogContent from './BlogContent'
@@ -15,6 +16,14 @@ async function getData(params) {
   } catch (error) {
     console.error(error)
     return undefined
+  }
+}
+
+export async function generateMetadata({ params }) {
+  const id = params.id
+  const blog = await getBlogTitle(id)
+  return {
+    title: blog.blogTitle,
   }
 }
 
