@@ -28,8 +28,8 @@ export default async function Page(props) {
   const { label } = searchParams
 
   const {
-    blogList,
-    labelCloud
+    blogList = [],
+    labelCloud = []
   } = await getData(firstLoadingSize, label) || {}
 
   return (
