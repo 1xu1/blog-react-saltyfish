@@ -204,3 +204,12 @@ export async function updateShare(share) {
     .returning()
   return data
 }
+
+export async function getBlogTitle(blogId) {
+  const data = (await db.select({
+    blogTitle: m_blog.blogTitle
+  })
+    .from(m_blog)
+    .where(eq(m_blog.id, blogId)))[0]
+  return data
+}
