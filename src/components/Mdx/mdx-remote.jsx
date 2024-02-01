@@ -48,7 +48,7 @@ const components = {
     </li>
   ),
   p: (props) => (
-    <p {...props} className=" my-5">
+    <p {...props} className=" my-5 leading-8">
       {props.children}
     </p>
   ),
