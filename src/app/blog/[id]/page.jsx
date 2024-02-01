@@ -44,7 +44,7 @@ export default async function Page({ params }) {
           </span>
         </aside>
         <div>
-          <div className='mx-auto w-full max-w-3xl bg-white p-8'>
+          <div className='mx-auto w-full max-w-3xl bg-white p-8 grid-background-img tracking-wide'>
             <BlogHeader blog={blog} />
             <BlogContent
               blogContent={blog.blogContent}>
