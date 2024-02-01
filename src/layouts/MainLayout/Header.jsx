@@ -90,7 +90,7 @@ export default function Header() {
           </a>}
           {
             loginStatus && <span className='flex flex-row justify-center items-center space-x-1'>
-              <Image width={32} height={32} className="h-8 w-auto rounded-full" src={userInfo?.avaterUrl} alt="" />
+              <img width={32} height={32} className="h-8 w-auto rounded-full" src={userInfo?.avaterUrl} alt="" />
               <Link href="/manager/blog">{userInfo?.userName}</Link>
             </span>
           }
