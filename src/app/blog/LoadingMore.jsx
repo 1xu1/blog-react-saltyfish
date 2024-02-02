@@ -13,9 +13,8 @@ export default function LoadingMore(props) {
   const [refresh, setRefresh] = useState(false)
   const {
     firstLoadingSize,
-    searchParams
+    label
   } = props
-  const { label } = searchParams
 
   useEffect(() => {
     setBlogContent([])
@@ -34,6 +33,12 @@ export default function LoadingMore(props) {
     setLoading(true)
     loadingEvent()
   }, [refresh])
+
+  // 加载事件
+  useEffect(() => {
+    setPageNum(1)
+    setBlogContent([])
+  }, [label])
 
   const loadingEvent = debounce(() => {
     getBlogList({
