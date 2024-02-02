@@ -36,9 +36,8 @@ export default function LoadingMore(props) {
 
   // 加载事件
   useEffect(() => {
-    if (loading) return
-    setLoading(true)
-    loadingEvent()
+    setPageNum(1)
+    setBlogContent([])
   }, [label])
 
   const loadingEvent = debounce(() => {
