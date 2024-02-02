@@ -16,7 +16,7 @@ const checkToken = (token) => {
     return decoded
   }
   catch (err) {
-    console.log('err---', err)
+    console.error('err---', err)
     return {}
   }
 }
@@ -27,7 +27,7 @@ const checkTokenRole = (token, userRole) => {
     return role === userRole
   }
   catch (err) {
-    console.log('err---', err)
+    console.error('err---', err)
     return false
   }
 }
@@ -38,7 +38,7 @@ const checkTokenUserId = (token, uid) => {
     return id == uid
   }
   catch (err) {
-    console.log('err---', err)
+    console.error('err---', err)
     return false
   }
 }

@@ -149,20 +149,41 @@ export async function insertUserByGithubUserInfo(userInfo) {
   return data[0]
 }
 
-// 查找
+// 后台页面查找博文
 export async function getBlogList(limit = 10, offset = 0) {
-  const {
-    // eslint-disable-next-line no-unused-vars
-    blogContent,
-    ...rest
-  } = m_blog
   const data = await db.select({
-    ...rest
+    id: m_blog.id,
+    blogLike: m_blog.blogLike,
+    blogRead: m_blog.blogRead,
+    blogTitle: m_blog.blogTitle,
+    blogLabel: m_blog.blogLabel,
+    blogTime: m_blog.blogTime,
   }).from(m_blog)
     .orderBy(desc(m_blog.blogTime))
     .limit(limit)
     .offset(offset)
 
+  return data
+}
+
+// 前台页面查找博文
+export async function getBlogListFront(limit = 10, offset = 0, label = '') {
+  const data = await db.select({
+    id: m_blog.id,
+    blogLike: m_blog.blogLike,
+    blogRead: m_blog.blogRead,
+    blogTitle: m_blog.blogTitle,
+    blogLabel: m_blog.blogLabel,
+    blogTime: m_blog.blogTime,
+  }).from(m_blog)
+    .where(
+      and(
+        eq(m_blog.blogVisibility, 1),
+        like(m_blog.blogLabel, `%${label}%`)
+      ))
+    .orderBy(desc(m_blog.blogTime))
+    .limit(limit)
+    .offset(offset)
   return data
 }
 
