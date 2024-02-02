@@ -55,7 +55,7 @@ export default async function Page(props) {
               key={blog.id}
             />
           })}
-          <LoadingMore searchParams={searchParams} firstLoadingSize={firstLoadingSize} />
+          <LoadingMore label={label} firstLoadingSize={firstLoadingSize} />
         </div>
         <aside className='max-lg:hidden w-1/4 max-w-xs'>
         </aside>
