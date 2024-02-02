@@ -28,13 +28,11 @@ export default function BlogEditor(props) {
 
   const login = (code, plat) => {
     PLAT_LOGIN_URL[plat](`?code=${code}`).then((res) => {
-      console.log('res---', res)
       localStorage.setItem('token', JSON.stringify(res.data.token))
       localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
       router.push('/')
     })
       .catch(err => {
-        console.log('err---', err)
         setMsg('哎呀，看起来登陆失败了' + err)
       })
   }

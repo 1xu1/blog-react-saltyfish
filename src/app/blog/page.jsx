@@ -1,18 +1,25 @@
+/* global
+  Promise
+*/
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop'
 
 import BlogBlock from './BlogBlock'
 import LableCloud from './LableCloud'
 import LoadingMore from './LoadingMore'
-import { getBlogListSql } from '@/app/api/blog/getBlogList/route.js'
+import { getBlogListFront } from '@/db/sql.js'
 import { getData as getLabelData } from '@/app/api/blog/getBlogLabels/route.js'
 
 async function getData(firstLoadingSize, label = '') {
   try {
-    const data = {}
-    data.blogList = await getBlogListSql(firstLoadingSize, 0, label ?? '')
-    data.labelCloud = await getLabelData()
-    return data
+    const result = await Promise.all([
+      getBlogListFront(firstLoadingSize, 0, label ?? ''),
+      getLabelData()
+    ])
+    return {
+      blogList: result[0],
+      labelCloud: result[1]
+    }
   } catch (error) {
     console.error(error)
     return undefined

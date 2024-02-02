@@ -23,7 +23,6 @@ export default function CommentBlock(props) {
   const refersh = () => {
     getBlogComment({ id: blogId })
       .then(res => {
-        console.log('res---', res)
         setComments(res.data)
       })
       .finally(() => {
