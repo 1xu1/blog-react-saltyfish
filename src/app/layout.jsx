@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 import WebsiteCounter from '@/components/WebsiteCounter/index'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         {children}
         <Analytics />
         <WebsiteCounter id={0} />
+        <SpeedInsights />
       </body>
     </html>
   )
