@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 import { getBlogLabels } from '@/db/sql.js'
 
+// 增加缓存机制
+const revalidate = 60; // 60秒
+let chache = {
+  data: null,
+  time: 0
+}
+
+
 export async function GET() {
   try {
     const data = getData()
@@ -12,8 +20,13 @@ export async function GET() {
 }
 
 export async function getData() {
+  const now = new Date().getTime()
+  if(now - chache.time > revalidate * 1000 && chache.data){
+    return chache.data
+  }
   const labels = await getBlogLabels()
   const data = generalLabelData(labels)
+  chache.data = data
   return data
 }
 
