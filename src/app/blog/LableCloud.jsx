@@ -1,11 +1,19 @@
 import React from 'react';
 import Link from 'next/link'
+import { getData as getLabelData } from '@/app/api/blog/getBlogLabels/route.js'
 
-export default function LableCloud(props) {
+async function getData() {
+  try {
+    const result = await getLabelData()
+    return result
+  } catch (error) {
+    console.error(error)
+    return undefined
+  }
+}
 
-  const {
-    labels
-  } = props
+export default async function LableCloud() {
+  const labels = await getData() || []
 
   return (
     <div className="w-full border bg-white p-4 rounded-md	">
