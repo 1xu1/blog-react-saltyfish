@@ -6,7 +6,7 @@ import BlogList from './BlogList'
 
 import { Suspense } from 'react'
 
-export default async function Page(props) {
+export default function Page(props) {
   const firstLoadingSize = 10
   const {
     searchParams
