@@ -1,10 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Dialog, Popover } from '@headlessui/react'
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import LoginModal from './LoginModal'
 import Image from 'next/image'
@@ -57,7 +53,7 @@ export default function Header() {
   }
 
   return (
-    <header className="border-y" style={{background: 'rgba(255,255,255,0.5)'}}>
+    <header className="border-y" style={{ background: 'rgba(255,255,255,0.5)' }}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
@@ -72,7 +68,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">打开主菜单</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
@@ -116,7 +112,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">关闭菜单</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
             </button>
           </div>
           <div className="mt-6 flow-root">
@@ -145,8 +141,8 @@ export default function Header() {
       </Dialog>
       <LoginModal
         visible={loginModalOpen}
-        onClose={() => setLoginModalOpen(false)} 
-        loginCallBack={loginCallBack}/>
+        onClose={() => setLoginModalOpen(false)}
+        loginCallBack={loginCallBack} />
     </header>
   )
 }
