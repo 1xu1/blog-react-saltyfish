@@ -20,7 +20,7 @@ const routeMenu = [
   },
   {
     title: '更新日志',
-    url: '/blog?label=更新日志'
+    url: '/blog/t/更新日志'
   },
   {
     title: '站点留言',
