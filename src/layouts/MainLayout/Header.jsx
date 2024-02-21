@@ -5,6 +5,8 @@ import Link from 'next/link'
 import LoginModal from './LoginModal'
 import Image from 'next/image'
 
+import { checkLogin } from '@/service/user'
+
 const routeMenu = [
   {
     title: '首页',
@@ -35,8 +37,19 @@ export default function Header() {
   }
 
   useEffect(() => {
-    localStorage.getItem('userInfo') && setUserInfo(JSON.parse(localStorage.getItem('userInfo') ?? '{}'))
-    localStorage.getItem('token') && setLoginStatus(true)
+    const userInfo = localStorage.getItem('userInfo')
+    const token = localStorage.getItem('token')
+    // 检测登录状态是否过期
+    if (userInfo && token) {
+      checkLogin()
+        .then(() => {
+          setUserInfo(JSON.parse(userInfo ?? '{}'))
+          setLoginStatus(true)
+        }).catch(() => {
+          localStorage.removeItem('userInfo')
+          localStorage.removeItem('token')
+        })
+    }
   }, [])
 
   const loginCallBack = (data) => {
@@ -68,7 +81,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">打开主菜单</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
@@ -112,7 +125,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">关闭菜单</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
             </button>
           </div>
           <div className="mt-6 flow-root">

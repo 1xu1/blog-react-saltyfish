@@ -153,11 +153,10 @@ export async function insertUserByGithubUserInfo(userInfo) {
 export async function getBlogList(limit = 10, offset = 0) {
   const data = await db.select({
     id: m_blog.id,
-    blogLike: m_blog.blogLike,
-    blogRead: m_blog.blogRead,
     blogTitle: m_blog.blogTitle,
     blogLabel: m_blog.blogLabel,
-    blogTime: m_blog.blogTime,
+    blogCreateTime: m_blog.blogCreateTime,
+    blogVisibility: m_blog.blogVisibility,
   }).from(m_blog)
     .orderBy(desc(m_blog.blogTime))
     .limit(limit)

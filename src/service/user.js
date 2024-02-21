@@ -23,3 +23,6 @@ export const getUserLikeBlogs = (params) => {
 export const loginByGithub = (params) => {
   return request.get("/user/loginByGithub" + params,)
 }
+export const checkLogin = () => {
+  return request.get("/user/checkLogin")
+}
