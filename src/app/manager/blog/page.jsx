@@ -3,6 +3,7 @@ import { getBlogList } from '@/db/sql.js'
 import Table from '@/components/Table/Table.jsx'
 import { getFormatTime } from '@/lib/time.js'
 import Link from 'next/link'
+import Operate from "./operate";
 
 async function getData() {
   let data = []
@@ -59,12 +60,13 @@ export default async function Page() {
 
   return (
     <MainLayout>
-      <Table
-        className='mx-auto'
-        dataSource={data}
-        columns={columns}
-      />
-      
+      <div className='mx-auto w-[1000px]'>
+        <Operate />
+        <Table
+          dataSource={data}
+          columns={columns}
+        />
+      </div>
     </MainLayout>
   )
 }

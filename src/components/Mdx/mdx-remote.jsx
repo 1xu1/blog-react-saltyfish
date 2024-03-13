@@ -13,24 +13,24 @@ const components = {
     </h2>
   ),
   h3: (props) => (
-    <h2 {...props} className="text-3xl my-6">
+    <h3 {...props} className="text-3xl my-6">
       {props.children}
-    </h2>
+    </h3>
   ),
   h4: (props) => (
-    <h2 {...props} className="text-2xl my-6">
+    <h4 {...props} className="text-2xl my-6">
       {props.children}
-    </h2>
+    </h4>
   ),
   h5: (props) => (
-    <h2 {...props} className="text-xl my-6">
+    <h5 {...props} className="text-xl my-6">
       {props.children}
-    </h2>
+    </h5>
   ),
   h6: (props) => (
-    <h2 {...props} className="text-lg my-6">
+    <h6 {...props} className="text-lg my-6">
       {props.children}
-    </h2>
+    </h6>
   ),
   code: (props) => (
     <code {...props} className="text-base text-sky-600 rounded-sm p-1 -z-10 bg-sky-100">

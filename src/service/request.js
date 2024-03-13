@@ -29,6 +29,7 @@ service.interceptors.response.use(
     return res;
   },
   (error) => {
+    console.error("request err" + error)
     return Promise.reject(error);
   }
 );

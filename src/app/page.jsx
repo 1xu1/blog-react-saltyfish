@@ -1,11 +1,15 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
+import NeonLight from '@/components/NeonLight/NeonLight.jsx'
 
 export default function Home() {
   return (
     <MainLayout>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div>
+          <NeonLight></NeonLight>
+        </div>
         <div className='mx-auto w-full max-w-3xl bg-white p-8 indent-8 grid-background-img tracking-wide leading-8'>
           <p>大家好啊，这里是盐巴鱼的个人博客。</p>
           <p>本站主要用于记录一些乱七八糟的技术笔记，以及写一些乱七八糟的杂记，或者是尝试在这个网站上尝试一些新的技术。</p>
