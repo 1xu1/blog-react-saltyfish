@@ -103,19 +103,20 @@ export default function BlogEditor(props) {
   }
 
   return <MainLayout>
-    <div className=" h-full">
-    <div className="flex flex-row justify-center md:w-auto bg-white py-5">
-      <span className="max-w-xs mx-5"><Input label={'标题'} value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)}></Input></span>
-      <span className="max-w-xs mx-5"><Input label={'标签'} value={blogLabel} placeholder={'#分割标签'} onChange={(e) => setBlogLabel(e.target.value)}></Input></span>
-      <div className="flex justify-between items-center mx-5 space-x-4">
-        <Button onClick={saveBlog} className="m-2">保存</Button>
-        {blogVisibility === 0 && <Button onClick={() => onChangeBlogVis(1)} className="m-2">发布</Button>}
-        {blogVisibility === 1 && <Button onClick={() => onChangeBlogVis(0)} className="m-2">隐藏</Button>}
-        <Button className="m-2" onClick={createBlog}>新建</Button>
+    <div className="h-full flex flex-col items-center justify-center">
+      <div className="flex flex-row justify-center md:w-auto bg-white py-5 ">
+        <span className="max-w-xs mx-5"><Input label={'标题'} value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)}></Input></span>
+        <span className="max-w-xs mx-5"><Input label={'标签'} value={blogLabel} placeholder={'#分割标签'} onChange={(e) => setBlogLabel(e.target.value)}></Input></span>
+        <div className="flex justify-between items-center mx-5 space-x-4">
+          <Button onClick={saveBlog} className="m-2">保存</Button>
+          {blogVisibility === 0 && <Button onClick={() => onChangeBlogVis(1)} className="m-2">发布</Button>}
+          {blogVisibility === 1 && <Button onClick={() => onChangeBlogVis(0)} className="m-2">隐藏</Button>}
+          <Button className="m-2" onClick={createBlog}>新建</Button>
+        </div>
       </div>
-    </div>
-
-    <MdEditor modelValue={blogContent} onChange={setBlogContent} onSave={saveBlog} style={{height: '80vh'}}/>
+      <div className="max-w-screen-xl">
+        <MdEditor modelValue={blogContent} onChange={setBlogContent} onSave={saveBlog} style={{ height: '80vh' }} />
+      </div>
     </div>
   </MainLayout>;
 }
