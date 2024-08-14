@@ -1,0 +1,47 @@
+.rain {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.drop {
+  position: absolute;
+  width: 15px;
+  height: 120px;
+  pointer-events: none;
+  animation: drop 0.5s linear infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.stem {
+  width: 2px;
+  height: 100%;
+  margin-left: 7px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+  animation: stem 0.5s linear infinite;
+  filter: blur(1px);
+}
+
+@keyframes stem {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+}
