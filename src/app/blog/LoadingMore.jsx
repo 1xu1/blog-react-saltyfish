@@ -2,7 +2,7 @@
 
 import { getBlogList } from '@/service/blog.js'
 import { useEffect, useState } from 'react';
-import { isScrollButtom, debounce } from '@/lib/utils.js';
+// import { debounce } from '@/lib/utils.js';
 import BlogBlock from './BlogBlock'
 import message from "@/components/Notifications/Message";
 
@@ -10,29 +10,28 @@ export default function LoadingMore(props) {
   const [blogList, setBlogContent] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageNum, setPageNum] = useState(1)
-  const [refresh, setRefresh] = useState(false)
+  // const [refresh, setRefresh] = useState(false)
   const {
     firstLoadingSize,
     label
   } = props
 
-  useEffect(() => {
-    setBlogContent([])
-    window.onscrollend = () => {
-      if (isScrollButtom()) {
-        setRefresh(prevValue => {
-          return !prevValue
-        })
-      }
-    };
-  }, [])
+  // useEffect(() => {
+  //   setBlogContent([])
+  //   window.onscrollend = () => {
+  //     if (isScrollButtom()) {
+  //       setRefresh(prevValue => {
+  //         return !prevValue
+  //       })
+  //     }
+  //   };
+  // }, [])
 
   // 加载事件
-  useEffect(() => {
-    if (loading) return
-    setLoading(true)
-    loadingEvent()
-  }, [refresh])
+  // useEffect(() => {
+  //   if (loading) return
+  //   loadingEvent()
+  // }, [refresh])
 
   // 加载事件
   useEffect(() => {
@@ -57,7 +56,8 @@ export default function LoadingMore(props) {
     return content
   }
 
-  const loadingEvent = debounce(() => {
+  const loadingEvent = () => {
+    setLoading(true)
     getBlogList({
       limit: firstLoadingSize,
       offset: firstLoadingSize * pageNum,
@@ -75,7 +75,7 @@ export default function LoadingMore(props) {
       .finally(() => {
         setLoading(false)
       })
-  })
+  }
 
   return <>
     {blogList.map(blog => {
@@ -86,6 +86,10 @@ export default function LoadingMore(props) {
     })}
     {
       loading && loadingSkeleton()
+    }
+    {
+      !loading &&
+      <span className='mx-auto cursor-pointer p-2 bg-white' onClick={loadingEvent}>加载更多</span>
     }
   </>
 }

@@ -6,6 +6,12 @@ import BlogList from './BlogList'
 
 import { Suspense } from 'react'
 
+export async function generateMetadata() {
+  return {
+    title: `盐巴鱼的技术博客 | 博文列表`,
+  }
+}
+
 export default function Page(props) {
   const firstLoadingSize = 10
   const {
@@ -61,8 +67,7 @@ export default function Page(props) {
         </div>
         <aside className='max-lg:hidden w-1/4 max-w-xs'>
         </aside>
-        <div>
-        </div>
+        
         <ScrollToTop />
       </main>
     </MainLayout>

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   const id = params.id
   const blog = await getBlogTitle(id)
   return {
-    title: blog.blogTitle,
+    title: `${blog.blogTitle} --- 盐巴鱼的技术博客`,
   }
 }
 

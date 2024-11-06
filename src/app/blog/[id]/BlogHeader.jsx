@@ -12,7 +12,7 @@ export default async function BlogHeader(props) {
 
   return (
     <div >
-      <p className=' text-4xl font-extrabold my-4'>{blogTitle}</p>
+      <h1 className=' text-4xl font-extrabold my-4'>{blogTitle}</h1>
       <p className='text-sm text-slate-600'>{getFormatTime(blogTime)}</p>
       <p className='flex flex-row leading-6 text-slate-700 my-2'>
         {blogLabelArr.map((item, index) => {
