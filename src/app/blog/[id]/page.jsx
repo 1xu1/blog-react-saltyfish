@@ -35,7 +35,7 @@ export default async function Page({ params }) {
     <MainLayout>
       <div className='flex min-h-screen flex-row justify-center mx-auto'>
         <aside className='max-lg:hidden w-1/4 max-w-xs relative'>
-          <span className='sticky top-1/2 flex flex-row-reverse'>
+          <span className='sticky top-20 flex flex-row-reverse'>
             <LeftSide likeNum={blog.blogLike} id={blog.id} />
           </span>
         </aside>
