@@ -20,22 +20,22 @@ export default function Page(props) {
 
   const { label } = searchParams
 
-  const loadingSkeleton = () => {
-    const content = []
-    for (let i = 0; i < firstLoadingSize; i++) {
-      content.push(<div className="w-full border-y bg-white hover:shadow p-5 mb-2">
-        <div className="animate-pulse flex max-w-2xl w-full mx-auto">
-          <div className="flex-1 space-y-3 py-1">
-            <div className="h-4 w-40 bg-slate-200 rounded"></div>
-            <div className="h-2 w-36 bg-slate-200 rounded"></div>
-            <div className="h-2 w-72 bg-slate-200 rounded"></div>
-            <div className="h-2 w-32 bg-slate-200 rounded"></div>
-          </div>
-        </div>
-      </div>)
-    }
-    return content
-  }
+  // const loadingSkeleton = () => {
+  //   const content = []
+  //   for (let i = 0; i < firstLoadingSize; i++) {
+  //     content.push(<div className="w-full border-y bg-white hover:shadow p-5 mb-2">
+  //       <div className="animate-pulse flex max-w-2xl w-full mx-auto">
+  //         <div className="flex-1 space-y-3 py-1">
+  //           <div className="h-4 w-40 bg-slate-200 rounded"></div>
+  //           <div className="h-2 w-36 bg-slate-200 rounded"></div>
+  //           <div className="h-2 w-72 bg-slate-200 rounded"></div>
+  //           <div className="h-2 w-32 bg-slate-200 rounded"></div>
+  //         </div>
+  //       </div>
+  //     </div>)
+  //   }
+  //   return content
+  // }
 
   return (
     <MainLayout>
@@ -61,13 +61,11 @@ export default function Page(props) {
 
         </aside>
         <div className="w-full max-w-3xl flex flex-col mx-4">
-          <Suspense fallback={loadingSkeleton()}>
-            <BlogList label={label} firstLoadingSize={firstLoadingSize} />
-          </Suspense>
+          <BlogList label={label} firstLoadingSize={firstLoadingSize} />
         </div>
         <aside className='max-lg:hidden w-1/4 max-w-xs'>
         </aside>
-        
+
         <ScrollToTop />
       </main>
     </MainLayout>
