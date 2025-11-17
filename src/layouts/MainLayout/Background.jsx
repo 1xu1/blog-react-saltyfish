@@ -23,7 +23,7 @@ export default function Background() {
 
   return (
     <div className='-z-10'>
-      <div className="fixed bg-[url('/background.jpg')] bg-black opacity-90 w-full h-full bg-cover bg-fixed top-0 left-0 -z-20 blur-sm"></div>
+      <div className="fixed bg-[url('/background.webp')] bg-black w-full h-full bg-cover bg-fixed top-0 left-0 -z-20 blur-sm"></div>
       <div className="fixed top-0 left-0 rain front-row -z-10">{getDrops()}</div>
     </div>
   )

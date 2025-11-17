@@ -16,7 +16,7 @@ export default async function LableCloud() {
   const labels = await getData() || []
 
   return (
-    <div className="w-full border bg-white p-4 rounded-md	">
+    <div className="sticky top-4 w-full border bg-white p-4 rounded-md shadow-sm z-20">
       <div>
         <p className=' text-2xl font-semibold mb-2'>标签云</p>
         <div className='flex flex-row flex-wrap gap-y-2'>

@@ -34,20 +34,20 @@ export default async function Page({ params }) {
   return (
     <MainLayout>
       <div className='flex min-h-screen flex-row justify-center mx-auto'>
-        <aside className='max-lg:hidden w-1/4 max-w-xs relative'>
-          <span className='sticky top-20 flex flex-row-reverse'>
+        <aside className='max-lg:hidden w-1/4 max-w-xs flex-shrink-0'>
+          <div className='sticky top-8 mt-8 self-start'>
             <LeftSide likeNum={blog.blogLike} id={blog.id} />
-          </span>
+          </div>
         </aside>
-        <div>
-          <div className='mx-auto w-full max-w-3xl bg-white p-8 grid-background-img tracking-wide'>
+        <div className="w-full max-w-3xl">
+          <div className='w-full bg-white p-4 sm:p-6 md:p-8 grid-background-img tracking-wide'>
             <BlogHeader blog={blog} />
             <BlogContent
               blogContent={blog.blogContent}>
             </BlogContent>
           </div>
 
-          <div className='mx-auto w-full max-w-3xl bg-white p-8 my-4'>
+          <div className='w-full bg-white p-4 sm:p-6 md:p-8 my-4'>
             <CommentBlock blogId={blogId}></CommentBlock>
           </div>
         </div>
