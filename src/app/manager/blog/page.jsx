@@ -11,17 +11,20 @@ export default function Page() {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const blogData = await getBlogList(500, 0);
-        setData(blogData || []);
-      } catch (error) {
-        console.error(error);
-        setData([]);
-      }
+  async function fetchData() {
+    try {
+      const blogData = await getBlogList({
+        limit: 500,
+        offset: 0
+      });
+      setData(blogData?.data || []);
+    } catch (error) {
+      console.error(error);
+      setData([]);
     }
+  }
 
+  useEffect(() => {
     fetchData();
   }, []);
 
