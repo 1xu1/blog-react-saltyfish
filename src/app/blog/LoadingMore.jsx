@@ -104,16 +104,37 @@ export default function LoadingMore(props) {
     const content = [];
     for (let i = 0; i < firstLoadingSize; i++) {
       content.push(
-        <div key={`loadingMore-index${i}`} className="w-full border-y bg-white hover:shadow p-5 mb-2">
-          <div className="animate-pulse flex max-w-2xl w-full mx-auto">
-            <div className="flex-1 space-y-3 py-1">
-              <div className="h-4 w-40 bg-slate-200 rounded"></div>
-              <div className="h-2 w-36 bg-slate-200 rounded"></div>
-              <div className="h-2 w-72 bg-slate-200 rounded"></div>
-              <div className="h-2 w-32 bg-slate-200 rounded"></div>
+        <article key={`loadingMore-index${i}`} className="group relative w-full overflow-hidden rounded-xl border border-slate-200 bg-white/95 p-6 shadow-sm backdrop-blur-sm transition-all duration-300">
+          <div className="absolute left-0 top-0 h-full w-1 bg-slate-200"></div>
+          <div className="flex flex-col gap-4 pl-2">
+            <div className="flex items-start justify-between gap-4">
+              <h2 className="text-lg font-bold text-slate-800 leading-tight animate-pulse">
+                <div className="h-6 w-3/4 bg-slate-200 rounded"></div>
+              </h2>
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-50">
+                <div className="h-4 w-4 bg-slate-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+            <div className="relative z-10 flex flex-wrap gap-2 animate-pulse">
+              <div className="h-6 w-20 bg-slate-200 rounded-full"></div>
+              <div className="h-6 w-24 bg-slate-200 rounded-full"></div>
+              <div className="h-6 w-16 bg-slate-200 rounded-full"></div>
+            </div>
+            <div className="flex items-center gap-3 border-t border-slate-100 pt-3 text-xs font-medium text-slate-500 animate-pulse">
+              <div className="h-4 w-24 bg-slate-200 rounded"></div>
+              <span className="h-0.5 w-0.5 rounded-full bg-slate-300"></span>
+              <div className="flex items-center gap-1">
+                <div className="h-3.5 w-3.5 bg-slate-200 rounded"></div>
+                <div className="h-4 w-8 bg-slate-200 rounded"></div>
+              </div>
+              <span className="h-0.5 w-0.5 rounded-full bg-slate-300"></span>
+              <div className="flex items-center gap-1">
+                <div className="h-3.5 w-3.5 bg-slate-200 rounded"></div>
+                <div className="h-4 w-8 bg-slate-200 rounded"></div>
+              </div>
             </div>
           </div>
-        </div>
+        </article>
       );
     }
     return content;
@@ -121,30 +142,32 @@ export default function LoadingMore(props) {
 
   return (
     <>
+
       {blogList.map(blog => (
         <BlogBlock
           blog={blog}
           key={blog.id}
         />
       ))}
-      
+
+
       {/* 加载骨架屏 */}
       {loading && loadingSkeleton()}
-      
+
       {/* 用于Intersection Observer的目标元素 */}
       <div ref={observerTargetRef} className="h-10 w-full"></div>
       {/* 手动加载更多按钮（当没有更多内容时隐藏） */}
       {!loading && hasMore && (
         <div className="flex justify-center my-4">
-          <button 
-            onClick={loadingEvent} 
+          <button
+            onClick={loadingEvent}
             className="cursor-pointer px-6 py-2 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors"
           >
             加载更多
           </button>
         </div>
       )}
-      
+
       {/* 没有更多内容的提示 */}
       {!hasMore && blogList.length > 0 && (
         <div className="flex justify-center my-4 text-gray-100">

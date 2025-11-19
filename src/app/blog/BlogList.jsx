@@ -22,15 +22,17 @@ export default async function LableCloud(props) {
 
   return (
     <>
-      {
-        blogList.map(blog => {
-          return <BlogBlock
-            blog={blog}
-            key={blog.id}
-          />
-        })
-      }
-      <LoadingMore label={label} firstLoadingSize={firstLoadingSize} />
+      <div className="flex flex-col items-center justify-center gap-2">
+        {
+          blogList.map(blog => {
+            return <BlogBlock
+              blog={blog}
+              key={blog.id}
+            />
+          })
+        }
+        <LoadingMore label={label} firstLoadingSize={firstLoadingSize} />
+      </div>
     </>
   );
 }

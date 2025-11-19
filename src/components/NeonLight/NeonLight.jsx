@@ -6,7 +6,7 @@ export default function NeonLight() {
 
   return (
     <div className="logo">
-      <b>盐<span>巴</span>鱼<span>的</span>博客</b>
+      <b>跋<span>鱼</span>寻<span>盐</span>小札</b>
     </div>
   )
 }

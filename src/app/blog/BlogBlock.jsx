@@ -1,6 +1,7 @@
 import React from 'react';
 import { getFormatTime } from '@/lib/time.js'
 import Link from 'next/link'
+import TechBadge from '@/components/Badge/TechBadge.jsx'
 
 export default function BlogBlock(props) {
 
@@ -16,34 +17,56 @@ export default function BlogBlock(props) {
   const blogLabelArr = blogLabel.split("#").filter(i => i)
 
   return (
-    <div className="w-full border-y bg-white hover:shadow p-5 mb-2">
-      <div className='max-w-2xl w-full mx-auto'>
-        <Link className='text-2xl font-semibold cursor-pointer hover:text-cyan-950' href={`/blog/${id}`}>{blogTitle}</Link>
-        <p className='text-sm text-slate-600'>{getFormatTime(blogTime)}</p>
-        <p className='flex flex-row leading-6 text-slate-700'>
-          {blogLabelArr.map((item, index) => {
-            return <Link key={index} className=' me-2 px-2 py-1 hover:bg-slate-100 rounded-md transition duration-300 ease-in-out' href={`/blog/t/${item}`}>
-              <span className=' text-cyan-400'>#</span>
-              {item}
+    <article className="group relative w-full overflow-hidden rounded-xl border border-slate-200 bg-white/95 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-indigo-300 hover:shadow-md">
+
+      <div className="absolute left-0 top-0 h-full w-1 bg-slate-200 transition-colors duration-300 group-hover:bg-indigo-500" />
+
+      <div className="flex flex-col gap-4 pl-2">
+
+        <div className="flex items-start justify-between gap-4">
+          <h2 className="text-lg font-bold text-slate-800 transition-colors group-hover:text-indigo-600 md:text-xl leading-tight">
+            <Link href={`/blog/${id}`} className="focus:outline-none">
+              {blogTitle}
             </Link>
-          })}
-        </p>
-        <p className='text-sm text-slate-600 flex flex-row leading-6'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-          </svg>
-          <span>
+          </h2>
+
+          <Link href={`/blog/${id}`} className="focus:outline-none">
+            <div className="flex h-8 w-8 flex-shrink-0 -translate-x-2 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+              </svg>
+            </div>
+          </Link>
+        </div>
+
+        <div className="relative z-10 flex flex-wrap gap-2">
+          {blogLabelArr.map((item, index) => (
+            <TechBadge
+              key={index}
+              text={item}
+              href={`/blog/t/${item}`}
+              isClickable={true}
+            />
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3 border-t border-slate-300 pt-3 text-xs font-medium text-slate-500">
+          <time dateTime={blogTime}>{getFormatTime(blogTime)}</time>
+
+          <span className="h-0.5 w-0.5 rounded-full bg-slate-300"></span>
+
+          <div className="flex items-center gap-1" title="阅读量">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
             {blogRead}
-          </span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
-          </svg>
-          <span>
+          </div>
+
+          <div className="flex items-center gap-1" title="点赞数">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
             {blogLike}
-          </span>
-        </p>
-        {/* <div className='text-base font-normal'>{blogContent}</div> */}
+          </div>
+        </div>
+
       </div>
-    </div>
+    </article>
   );
 }

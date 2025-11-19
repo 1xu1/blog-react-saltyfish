@@ -1,4 +1,5 @@
 import { getFormatTime } from '@/lib/time.js'
+import TechBadge from '@/components/Badge/TechBadge.jsx'
 
 export default async function BlogHeader(props) {
   const {
@@ -9,25 +10,6 @@ export default async function BlogHeader(props) {
   } = props.blog
 
   const blogLabelArr = blogLabel.split("#").filter(i => i)
-
-  // 定义标签颜色数组
-  const labelColors = [
-    'text-red-400',
-    'text-orange-400',
-    'text-yellow-400',
-    'text-green-400',
-    'text-teal-400',
-    'text-blue-400',
-    'text-indigo-400',
-    'text-purple-400',
-    'text-pink-400'
-  ]
-
-  // 随机选择颜色
-  const getRandomColor = (index) => {
-    const randomIndex = (index + Math.floor(Math.random() * 100)) % labelColors.length;
-    return labelColors[randomIndex];
-  }
 
   return (
     <>
@@ -49,11 +31,14 @@ export default async function BlogHeader(props) {
 
       <p className='flex flex-row leading-6 text-slate-700 my-2'>
         {blogLabelArr.map((item, index) => {
-          const randomColor = getRandomColor(index);
-          return <a key={index} className='slate me-2 px-2 py-1 border hover:bg-slate-50 rounded-md border-inherit transition duration-300 ease-in-out' href={`/blog?label=${item}`}>
-            <span className={randomColor}>#</span>
-            {`${item}`}
-          </a>
+          return <TechBadge 
+            key={index} 
+            text={item} 
+            index={index} 
+            href={`/blog?label=${item}`} 
+            isClickable={true} 
+            className="me-2"
+          />
         })}
       </p>
 

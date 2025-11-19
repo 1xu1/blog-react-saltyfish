@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .text-shadow-neon {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.8), 0 0 1em rgba(44, 71, 168, 0.6), 0 0 0.5em rgba(44, 71, 168, 0.8), 0 0 0.1em rgba(44, 71, 168, 0.8), 0 10px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 245 245 245;

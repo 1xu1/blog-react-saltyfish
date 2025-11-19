@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 
 export async function generateMetadata() {
   return {
-    title: `盐巴鱼的技术博客 | 博文列表`,
+    title: `跋鱼寻盐的技术博客 | 博文列表`,
   }
 }
 
@@ -20,37 +20,23 @@ export default function Page(props) {
 
   const { label } = searchParams
 
-  // const loadingSkeleton = () => {
-  //   const content = []
-  //   for (let i = 0; i < firstLoadingSize; i++) {
-  //     content.push(<div className="w-full border-y bg-white hover:shadow p-5 mb-2">
-  //       <div className="animate-pulse flex max-w-2xl w-full mx-auto">
-  //         <div className="flex-1 space-y-3 py-1">
-  //           <div className="h-4 w-40 bg-slate-200 rounded"></div>
-  //           <div className="h-2 w-36 bg-slate-200 rounded"></div>
-  //           <div className="h-2 w-72 bg-slate-200 rounded"></div>
-  //           <div className="h-2 w-32 bg-slate-200 rounded"></div>
-  //         </div>
-  //       </div>
-  //     </div>)
-  //   }
-  //   return content
-  // }
 
   return (
     <MainLayout>
       <main className="flex min-h-screen flex-row justify-center mx-auto my-4">
         <aside className='max-lg:hidden w-1/4 max-w-xs'>
-          <Suspense fallback={<div className="w-full border bg-white p-4 rounded-md	">
+          <Suspense fallback={<div className="w-full rounded-2xl border border-white/50 bg-white/90 p-4 shadow-xl backdrop-blur-md">
             <div>
-              <p className=' text-2xl font-semibold mb-2'>标签云</p>
-              <div className='flex flex-row flex-wrap gap-y-2'>
-                <div className="animate-pulse flex max-w-2xl w-full mx-auto">
-                  <div className="flex-1 space-y-3 py-1">
-                    <div className="h-4 w-full bg-slate-200 rounded"></div>
-                    <div className="h-4 w-full bg-slate-200 rounded"></div>
-                    <div className="h-4 w-full bg-slate-200 rounded"></div>
-                    <div className="h-4 w-full bg-slate-200 rounded"></div>
+              <p className=' text-2xl font-semibold mb-3'>标签云</p>
+              <div className='flex flex-row flex-wrap gap-2'>
+                <div className="animate-pulse">
+                  <div className="flex flex-wrap gap-2">
+                    <div className="h-7 w-24 bg-slate-200 rounded-full"></div>
+                    <div className="h-7 w-20 bg-slate-200 rounded-full"></div>
+                    <div className="h-7 w-16 bg-slate-200 rounded-full"></div>
+                    <div className="h-7 w-28 bg-slate-200 rounded-full"></div>
+                    <div className="h-7 w-18 bg-slate-200 rounded-full"></div>
+                    <div className="h-7 w-22 bg-slate-200 rounded-full"></div>
                   </div>
                 </div>
               </div>

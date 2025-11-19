@@ -1,24 +1,29 @@
+"use client"
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
-import { getBlogList } from '@/db/sql.js'
+import { getBlogList } from '@/service/blog.js'
 import Table from '@/components/Table/Table.jsx'
 import { getFormatTime } from '@/lib/time.js'
 import Link from 'next/link'
 import Operate from "./operate";
+import { useState, useEffect } from 'react';
 
-async function getData() {
-  let data = []
-  try {
-    data = await getBlogList(500, 0)
-    return data
-  } catch (error) {
-    console.error(error)
-    return undefined
-  }
-}
+export default function Page() {
 
-export default async function Page() {
+  const [data, setData] = useState([]);
 
-  const data = await getData() || []
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const blogData = await getBlogList(500, 0);
+        setData(blogData || []);
+      } catch (error) {
+        console.error(error);
+        setData([]);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const columns = [
     {
