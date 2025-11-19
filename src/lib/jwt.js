@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 const tokenKey = process.env?.JWT_SECRET_KEY || 'JWT_SECRET_KEY'
 const expiresTime = '1d'
 
@@ -43,7 +43,7 @@ const checkTokenUserId = (token, uid) => {
   }
 }
 
-module.exports = {
+export {
   getToken,
   checkToken,
   checkTokenRole,

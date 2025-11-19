@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/navigation'
 import { loginByGithub } from "@/service/user"
 
@@ -13,7 +13,7 @@ export default function BlogEditor(props) {
   const {
     searchParams
   } = props
-  const { code, plat } = searchParams
+  const { code, plat } = React.use(searchParams)
 
   const [msg, setMsg] = useState('稍等，正在为您的登陆跳转中')
 

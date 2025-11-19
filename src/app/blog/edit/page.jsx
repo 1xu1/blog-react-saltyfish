@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from 'next/navigation'
 import { getBlog, updateBlog, addBlog } from '@/service/blog.js'
 import { transBlogContent } from '@/lib/utils'
@@ -28,7 +28,7 @@ export default function BlogEditor(props) {
     searchParams
   } = props
 
-  const { id } = searchParams
+  const { id } = React.use(searchParams)
 
   useEffect(() => {
     refreshBlog()

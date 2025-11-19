@@ -8,7 +8,8 @@ import LeftSide from './LeftSide'
 import CommentBlock from './CommentBlock'
 
 async function getData(params) {
-  const blogId = params['id']
+  const resolvedParams = await params
+  const blogId = resolvedParams['id']
   try {
     const data = await getBlogSql(blogId)
     return data
@@ -19,7 +20,8 @@ async function getData(params) {
 }
 
 export async function generateMetadata({ params }) {
-  const id = params.id
+  const resolvedParams = await params
+  const id = resolvedParams.id
   const blog = await getBlogTitle(id)
   return {
     title: `${blog.blogTitle} --- 跋鱼寻盐的技术博客`,
@@ -28,7 +30,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
 
-  const blogId = params['id']
+  const resolvedParams = await params
+  const blogId = resolvedParams['id']
   const blog = await getData(params) || {}
 
   return (

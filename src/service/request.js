@@ -1,4 +1,3 @@
-/*global Promise */
 import axios from "axios";
 import message from "@/components/Notifications/Message";
 import { isServer } from '@/lib/utils.js'

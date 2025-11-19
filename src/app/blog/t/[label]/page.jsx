@@ -6,13 +6,14 @@ import BlogList from '../../BlogList'
 
 import { Suspense } from 'react'
 
-export default function Page(props) {
+export default async function Page(props) {
   const firstLoadingSize = 10
   const {
     params
   } = props
 
-  const { label } = params
+  const resolvedParams = await params
+  const { label } = resolvedParams
 
   const loadingSkeleton = () => {
     const content = []

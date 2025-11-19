@@ -1,8 +1,8 @@
-.jump-in:local{
+.jump-in{
   animation: ease-in 0.2s reverse both running slidein;
 }
 
-.jump-out:local{
+.jump-out{
   animation: ease-in 0.2s reverse both running slideout;
 }
 

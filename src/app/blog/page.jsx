@@ -12,13 +12,14 @@ export async function generateMetadata() {
   }
 }
 
-export default function Page(props) {
+export default async function Page(props) {
   const firstLoadingSize = 10
   const {
-    searchParams
+    searchParams = {}
   } = props
 
-  const { label } = searchParams
+  const resolvedSearchParams = await searchParams;
+  const { label } = resolvedSearchParams
 
 
   return (
