@@ -15,7 +15,7 @@ export async function POST(request) {
     blogVisibility
   } = await request.json()
 
-  const headersList = headers()
+  const headersList = await headers()
   const token = headersList.get('Authorization')
 
   try {

@@ -8,7 +8,7 @@ export async function POST(request) {
     content,
     blogId
   } = await request.json()
-  const headersList = headers()
+  const headersList = await headers()
   const token = headersList.get('Authorization')
   try {
     let userId = null

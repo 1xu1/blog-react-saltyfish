@@ -10,7 +10,7 @@ export async function GET(request) {
   const label = searchParams.get('label') || ''
 
   try {
-    const headersList = headers()
+    const headersList = await headers()
     const token = headersList.get('Authorization')
     if (!checkTokenRole(token, 'admin')) {
       return NextResponse.json({ error: '您无查询权限' })

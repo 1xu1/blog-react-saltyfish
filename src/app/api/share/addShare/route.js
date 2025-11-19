@@ -11,7 +11,7 @@ export async function POST(request) {
     icon,
     label
   } = await request.json()
-  const headersList = headers()
+  const headersList = await headers()
   const token = headersList.get('Authorization')
 
   try {

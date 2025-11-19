@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
 
   try {
-    const headersList = headers()
+    const headersList = await headers()
     const token = headersList.get('Authorization')
 
     const userInfo = checkToken(token)
