@@ -1,6 +1,6 @@
 "use client"
 import MainLayout from '@/layouts/MainLayout/MainLayout.jsx'
-import { getBlogList } from '@/service/blog.js'
+import { getBlogListAdmin } from '@/service/blog.js'
 import Table from '@/components/Table/Table.jsx'
 import { getFormatTime } from '@/lib/time.js'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ export default function Page() {
 
   async function fetchData() {
     try {
-      const blogData = await getBlogList({
+      const blogData = await getBlogListAdmin({
         limit: 500,
         offset: 0
       });

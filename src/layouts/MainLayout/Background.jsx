@@ -1,3 +1,4 @@
+'use client'
 import './index.css'
 
 export default function Background() {

@@ -23,3 +23,6 @@ export const updateBlogVis = (params) => {
 export const addRead = (params) => {
   return request.post("/blog/addRead", params);
 };
+export const getBlogListAdmin = (params) => {
+  return request.get("/blog/getBlogListAdmin", params);
+};

@@ -1,12 +1,5 @@
+'use client'
 import React from 'react';
-
-/**
-  columns => [{
-    dataIndex,
-    title,
-    render
-  }]
-**/
 
 export default function Table(props) {
   const {
