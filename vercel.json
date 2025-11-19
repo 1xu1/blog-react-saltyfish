@@ -1,0 +1,4 @@
+{
+  "packageManager": "pnpm",
+  "installCommand": "pnpm install --legacy-peer-deps"
+}
