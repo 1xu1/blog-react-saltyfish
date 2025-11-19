@@ -36,6 +36,4 @@ next-env.d.ts
 
 .vercel
 
-/pnpm-lock.yaml
-
 .eslintcache
