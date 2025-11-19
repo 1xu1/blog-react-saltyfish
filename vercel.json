@@ -1,4 +1,3 @@
 {
-  "packageManager": "pnpm",
-  "installCommand": "pnpm install --legacy-peer-deps"
+  "buildCommand": "pnpm install --legacy-peer-deps && pnpm run build"
 }
