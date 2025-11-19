@@ -12,10 +12,10 @@
     "prepare": "husky"
   },
   "lint-staged": {
-      "src/**/*.{js,jsx,ts,tsx}": [
-        "eslint --fix"
-      ]
-    },
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@next/bundle-analyzer": "16.0.3",
@@ -28,7 +28,7 @@
     "eslint": "^9.39.1",
     "eslint-config-next": "16.0.3",
     "jsonwebtoken": "^9.0.2",
-    "md-editor-rt": "^4.8.2",
+    "md-editor-rt": "^6.2.0",
     "next": "16.0.3",
     "next-mdx-remote": "^5.0.0",
     "next-nprogress-bar": "^2.1.2",
