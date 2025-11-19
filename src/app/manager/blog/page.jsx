@@ -10,8 +10,10 @@ import { useState, useEffect } from 'react';
 export default function Page() {
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchData() {
+    setLoading(true);
     try {
       const blogData = await getBlogListAdmin({
         limit: 500,
@@ -21,6 +23,8 @@ export default function Page() {
     } catch (error) {
       console.error(error);
       setData([]);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -73,6 +77,7 @@ export default function Page() {
         <Table
           dataSource={data}
           columns={columns}
+          loading={loading}
         />
       </div>
     </MainLayout>
