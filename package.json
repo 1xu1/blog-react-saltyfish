@@ -30,7 +30,7 @@
     "jsonwebtoken": "^9.0.2",
     "md-editor-rt": "^4.8.2",
     "next": "16.0.3",
-    "next-mdx-remote": "^4.4.1",
+    "next-mdx-remote": "^5.0.0",
     "next-nprogress-bar": "^2.1.2",
     "postcss": "8.4.32",
     "react": "19.2.0",
