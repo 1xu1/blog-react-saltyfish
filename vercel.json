@@ -1,3 +1,0 @@
-{
-  "buildCommand": "pnpm install --legacy-peer-deps && pnpm run build"
-}
