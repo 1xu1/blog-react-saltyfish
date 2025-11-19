@@ -19,13 +19,13 @@ function getLastDate(time) {
     const date = new Date(time);
     const month = date.getMonth() + 1;
     const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    const hours =
+    const hours = 
         date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-    const minutes =
+    const minutes = 
         date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    const seconds =
-        date.getSeconds() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    return `${date.getFullYear()}-${month}-${day}  ${hours}:${minutes}:${seconds}`
+    const seconds = 
+        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return `${date.getFullYear()}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 export function getFormatTime(timestamp) {
     if(!timestamp) return ''
@@ -44,7 +44,7 @@ export function getFormatTime(timestamp) {
     } else if (timer >= 3600 && timestamp1 - today >= 0) {
         tip = Math.floor(timer / 3600) + "小时前";
     } else if (timer / 86400 <= 31) {
-        tip = Math.ceil(timer / 86400) + "天前";
+        tip = Math.floor(timer / 86400) + "天前";
     } else {
         tip = getLastDate(timestamp);
     }

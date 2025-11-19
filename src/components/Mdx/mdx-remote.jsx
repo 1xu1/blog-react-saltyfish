@@ -1,5 +1,6 @@
 // components/mdx-remote.js
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import CodeBlock from './CodeBlock'
 
 const components = {
   h1: (props) => (
@@ -32,15 +33,28 @@ const components = {
       {props.children}
     </h6>
   ),
-  code: (props) => (
-    <code {...props} className="text-base text-sky-600 rounded-sm p-1 -z-10 bg-sky-100">
-      {props.children}
-    </code>
-  ),
+  code: (props) => {
+    // 处理内联代码
+    if (!props.className) {
+      return (
+        <code {...props} className="text-base text-sky-600 rounded-sm p-1 bg-sky-100">
+          {props.children}
+        </code>
+      )
+    }
+    // 代码块中的code元素，由pre组件处理
+    return <code {...props}>{props.children}</code>
+  },
   pre: (props) => {
-    return <pre {...props} className="text-base text-white rounded-sm my-4 p-2 bg-sky-100 overflow-x-auto">
-      {props.children}
-    </pre>
+    // 处理代码块，使用客户端CodeBlock组件
+    const codeElement = props.children.props
+    if (!codeElement) return <pre {...props}>{props.children}</pre>
+    
+    return (
+      <CodeBlock className={codeElement.className}>
+        {codeElement.children}
+      </CodeBlock>
+    )
   },
   li: (props) => (
     <li {...props} className=" ml-4 leading-7 list-disc">
